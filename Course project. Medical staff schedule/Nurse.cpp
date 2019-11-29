@@ -39,6 +39,13 @@ string Nurse::getWorkProfile()
 	return workprofile;
 }
 
+void Nurse::table(std::ostream & out)
+{
+	using namespace std;
+	MedicalStaff::table(out);
+	out << setiosflags(ios::left) << setw(20) << "Профиль работы";
+}
+
 void Nurse::chooseParameters()
 {
 	MedicalStaff::chooseParameters();

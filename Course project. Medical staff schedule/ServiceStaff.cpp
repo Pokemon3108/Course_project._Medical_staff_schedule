@@ -17,6 +17,12 @@ std::ostream & operator<<(std::ostream & out, const ServiceStaff & obj)
 	return out;
 }
 
+void ServiceStaff::table(std::ostream & out)
+{
+	TechnicalStaff::table(out);
+	out << std::setiosflags(std::ios::left) << setw(20) << "Рабочая область";
+}
+
 void ServiceStaff::chooseParameters()
 {
 	TechnicalStaff::chooseParameters();

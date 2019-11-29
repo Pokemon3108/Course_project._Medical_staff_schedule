@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Exception.h"
 
-std::string Exception::what()
+string Exception::what()
 {
 	return errorText;
 }

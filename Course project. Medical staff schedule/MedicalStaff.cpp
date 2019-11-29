@@ -38,6 +38,13 @@ std::ostream & operator<<(std::ostream & out, const MedicalStaff & obj)
 	return out;
 }
 
+void MedicalStaff::table(std::ostream & out)
+{
+	Staff::table(out);
+	out << std::setiosflags(std::ios::left) << setw(20) << "Отделение";
+}
+
+
 void MedicalStaff::chooseParameters()
 {
 	Staff::chooseParameters();

@@ -61,3 +61,9 @@ string TechnicalStaff::getParameter(int n)
 	}
 	else return parameter;
 }
+
+void TechnicalStaff::table(std::ostream & out)
+{
+	Staff::table(out);
+	out << std::setiosflags(std::ios::left) << setw(20) << "Профессия";
+}

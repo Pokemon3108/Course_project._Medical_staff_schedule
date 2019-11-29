@@ -50,6 +50,13 @@ void Doctor::setSpeciality(string speciality_)
 	speciality = speciality_;
 }
 
+void Doctor::table(std::ostream & out)
+{
+	using namespace std;
+	MedicalStaff::table(out);
+	out << setiosflags(ios::left) << setw(11) << "Категория" << setw(20) << "Специальность";
+}
+
 void Doctor::chooseParameters()
 {
 	MedicalStaff::chooseParameters();

@@ -29,11 +29,12 @@ public:
 
 	friend std::istream& operator >> (std::istream& in, Staff& obj);
 	friend std::ostream& operator << (std::ostream& out, const Staff& obj);
-	void inputGraphic(std::istream& in, list<graphic>& list_graphic);
 
-	virtual void table(std::ostream&out);
+	void inputGraphic(std::istream& in, list<graphic>& list_graphic);
+	virtual void table(std::ostream & out);
 	void tableGraphic(std::ostream & out);
-	//void outputGraphic(std::)
+	void outputGraphic(std::ostream & out, list<graphic>& list_graphic);
+
 	virtual void chooseParameters();
 	virtual std::string getParameter(int n);
 
@@ -56,4 +57,9 @@ public:
 	
 	int getHour2(string day, list<graphic>& gr) const;
 	void setHour2(string day, int hour, list<graphic>& gr);
+
+	list<graphic>& getDutyGraphic();
+	list<graphic>& getWorkGraphic();
+
+	bool daysInGraphic(list<graphic>& objInTree, list<graphic>& objSearch);
 };

@@ -1,8 +1,11 @@
 ﻿#include "pch.h"
 #include <iostream>
+#include "Interface.h"
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	setlocale(LC_ALL, "Russian");
+	Interface<int> obj;
+	obj.menu();
 }
 

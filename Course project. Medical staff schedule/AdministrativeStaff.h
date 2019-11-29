@@ -22,6 +22,8 @@ public:
 	virtual void chooseParameters() override;
 	virtual string getParameter(int n) override;
 
+	virtual void table(std::ostream & out) override;
+
 	bool operator==(AdministrativeStaff& obj);
 	bool operator!=(AdministrativeStaff& obj);
 

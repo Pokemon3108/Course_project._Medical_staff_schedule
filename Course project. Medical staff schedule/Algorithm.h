@@ -26,13 +26,3 @@ int size(Iterator begin, Iterator end)
 	return i;
 }
 
-template<typename T>
-typename Tree<T>::Iterator lower_bound(typename Tree<T>::Iterator begin, typename Tree<T>::Iterator end, T& obj)
-{
-
-	for (begin; begin != end; begin++)
-	{
-		if (*begin > obj) return begin;
-	}
-	return begin;
-}

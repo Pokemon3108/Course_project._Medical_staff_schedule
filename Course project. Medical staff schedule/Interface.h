@@ -7,7 +7,7 @@
 #include "Functor.h"
 #include "Tree.h"
 #include "Algorithm.h"
-#include <vector>
+
 
 
 using std::cout;
@@ -42,7 +42,7 @@ inline void Interface<T>::menu()
 		cout << "Выберите тип: " << endl;
 		cout << "1-Доктор" << endl;
 		cout << "2-Медсестра" << endl;
-		cout << "3-Специалисты в других сферах" << endl;
+		cout << "3-Специалист в других сферах" << endl;
 		cout << "4-Обслуживающий персонал" << endl;
 		cout << "0-Выйти из программы" << endl;
 		cin >> n;
@@ -94,11 +94,11 @@ inline bool Interface<T>::action()
 		cout << "2-Вывести все объекты" << endl;
 		cout << "3-Удалить объект" << endl;
 		cout << "4-Удалить всё" << endl;
-		cout << "5-Найти объекты по параметрам" << endl;
-		cout << "6-Найти объект по параметру" << endl;
+		cout << "5-Найти объекты по всем параметрам" << endl;
+		cout << "6-Найти объект по выбранным параметрам" << endl;
 		cout << "7-Количество объектов" << endl;
 		cout << "8-Осуществить операции с объектами других классов" << endl;
-		cout << "0-End of program" << endl;
+		cout << "0-Конец программы" << endl;
 		cin >> n;
 
 
@@ -108,7 +108,7 @@ inline bool Interface<T>::action()
 		case 1:
 		{
 			T obj;
-			cout << "\nInput element" << endl;
+			cout << "\nВведите объект" << endl;
 			cin >> obj;
 			tree.push(obj);
 			break;
@@ -119,13 +119,14 @@ inline bool Interface<T>::action()
 			T obj;
 			obj.table(cout);
 			tree.showInOrder(tree.getRoot());
+			//добавить вывод графика дежурств
 			break;
 		}
 
 		case 3:
 		{
 			T obj;
-			cout << "\nInput element" << endl;
+			cout << "\nВведите объект" << endl;
 			cin >> obj;
 			tree.pop(obj);
 			break;
@@ -154,17 +155,17 @@ inline bool Interface<T>::action()
 		case 6:
 		{
 			T obj;
-			cout << "\nInput element" << endl;
+			cout << "\nВведите объект" << endl;
 			cin >> obj;
 			Node<T>* temp = tree.search(obj);
-			if (!temp) cout << "There is no such element in tree";
-			else cout << "Object has been found";
+			if (!temp) cout << "Такого элемента не существует";
+			else cout << "Элемент был найден";
 		}
 		case 7:
 		{
 
 			int s = size(tree.begin(), tree.end());
-			std::cout << "Size=" << s << endl;
+			std::cout << "Количество работников данной сферы=" << s << endl;
 			break;
 		}
 		case 8:
@@ -188,7 +189,7 @@ void Interface<T>::searchMenu(T& obj, Functor & f)
 		cin >> n;
 		std::string strForSet = obj.getParameter(n);
 		func.getSetFields().insert(strForSet);
-		cout << "Choose one more parameter:" << endl << "1-Yes" << endl << "0-No" << endl;
+		cout << "Выбрать ещё один параметр:" << endl << "1-Да" << endl << "0-Нет" << endl;
 		cin >> i;
 	} while (i);
 	f = func;

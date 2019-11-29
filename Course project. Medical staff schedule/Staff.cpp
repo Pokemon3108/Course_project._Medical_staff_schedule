@@ -5,13 +5,13 @@
 
 std::istream & operator>>(std::istream & in, Staff & obj)
 {
-	cout << "Имя:";
+	cout << "Имя: ";
 	inputLetters(in, obj.firstName);
-	cout << "Фамилия:";
+	cout << "Фамилия: ";
 	inputLetters(in, obj.surname);
-	cout << "Отчество";
+	cout << "Отчество: ";
 	inputLetters(in, obj.fatherName);
-	cout << "График дежурств" << endl;
+	cout << "График дежурств:" << endl;
 	obj.inputGraphic(in, obj.duty_graphic);
 	cout << "График работы:" << endl;
 	obj.inputGraphic(in, obj.work_graphic);
@@ -40,37 +40,60 @@ void Staff::inputGraphic(std::istream & in, list<graphic>& list_graphic)
 		{
 			if ((*it).weekday == day)
 				cout << "\nДанный день недели уже существует в графике. Для изменения выполните операцию редактирования\n";
-			it++;;
+			it++;
 		}
-		cout << "Первый час=";
-		inputNumber(in, gr.hour1, 0, 24);
-		cout << "Последний час=";
-		inputNumber(in, gr.hour2, 0, 24);
+		if (it==list_graphic.end())
+		{
+			cout << "Первый час=";
+			inputNumber(in, gr.hour1, 0, 24);
+			cout << "Последний час=";
+			inputNumber(in, gr.hour2, 0, 24);
+			list_graphic.push_back(gr);
+		}
 		
 
-		list_graphic.push_back(gr);
-
-		cout << "1-Ввести еще один день графика";
-		cout << "0-Закончить ввод графика";
-		cin >> i;
+	cout << "1-Ввести еще один день графика"<<endl<< "0-Закончить ввод графика"<<endl;
+	in >> i;
 
 	} while (i);
 }
 
-//void Staff::outputGraphic(std::istream & in, list<graphic>& list_graphic)
-//{
-//	list<graphic>::iterator it;
-//	int i=0;
-//	for (it = list_graphic.begin(); it != list_graphic.end(); it++, i++)
-//	{
-//		if ((*it).weekday == "Понедельник" && i==0) 
-//		{
-//			cout << setw(13) << (*it).hour1 - (*it).hour2;
-//			continue;
-//		}
-//
-//	}
-//}
+void Staff::outputGraphic(std::ostream & out, list<graphic>& list_graphic)
+{
+	list<graphic>::iterator it1, it2;
+	int i = 1;
+	for (it1 = list_graphic.begin(); it1 != list_graphic.end(); ++it1, ++i)
+	{
+		for (it2 = list_graphic.begin(); it2 != list_graphic.end(); ++it2)
+		{
+			string time = std::to_string(it2->hour1) + "-" + std::to_string(it2->hour2);
+			
+			if (it2->weekday == "Понедельник" && i == 1)
+				out << std::setiosflags(std::ios::left) << setw(13) << time;
+
+			else if (it2->weekday == "Вторник" && i == 2)
+				out << std::setiosflags(std::ios::left) << setw(9) << time;
+
+			else if (it2->weekday == "Среда" && i == 3)
+				out << std::setiosflags(std::ios::left) << setw(6) << time;
+
+			else if (it2->weekday == "Четверг" && i == 4)
+				out << std::setiosflags(std::ios::left) << setw(9) << time;
+
+			else if (it2->weekday == "Пятница" && i == 5)
+				out << std::setiosflags(std::ios::left) << setw(9) << time;
+
+			else if (it2->weekday == "Суббота" && i == 6)
+				out << std::setiosflags(std::ios::left) << setw(9) << time;
+
+			else if (it2->weekday == "Воскресенье" && i == 7)
+				out << std::setiosflags(std::ios::left) << setw(13) << time;
+
+			else out << setw(13) << ' ' << endl;
+		}
+
+	}
+}
 	
 
 void Staff::table(std::ostream & out)
@@ -216,4 +239,28 @@ void Staff::setHour2(string day, int hour, list<graphic>& gr)
 	for (; iter != gr.end(); iter++)
 		if (iter->weekday == day) iter->hour2 = hour;
 	
+}
+
+list<graphic>& Staff::getDutyGraphic()
+{
+	return this->duty_graphic;
+}
+
+list<graphic>& Staff::getWorkGraphic()
+{
+	return this->work_graphic;
+}
+
+bool Staff::daysInGraphic(list<graphic>& objInTree, list<graphic>& objSearch)
+{
+	list<graphic>::iterator it1, it2;
+	for (it1 = objSearch.begin(); it1 != objSearch.end(); ++it1)
+	{
+		for (it2 = objInTree.begin(); it2 != objInTree.end(); ++it2)
+		{
+			if (it1->weekday == it2->weekday) break;
+			if (it2 == objInTree.end()) return false;
+		}
+	}
+	return true;
 }

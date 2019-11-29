@@ -4,12 +4,12 @@
 #include "Nurse.h"
 #include "AdministrativeStaff.h"
 #include "pch.h"
-#include <string>
+//#include <string>
 
 class Functor
 {
 private:
-	std::set<std::string> setFields;
+	set<string> setFields;
 
 public:
 	Functor() {};
@@ -24,5 +24,5 @@ public:
 	bool operator()(ServiceStaff& obj1, ServiceStaff& obj2);
 	bool operator()(AdministrativeStaff& obj1, AdministrativeStaff& obj2);
 	
-	std::set<std::string>& getSetFields();
+	set<string>& getSetFields();
 };

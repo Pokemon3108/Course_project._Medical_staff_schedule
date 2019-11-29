@@ -171,6 +171,7 @@
     <ClCompile Include="Course project. Medical staff schedule.cpp" />
     <ClCompile Include="Doctor.cpp" />
     <ClCompile Include="Exception.cpp" />
+    <ClCompile Include="Functor.cpp" />
     <ClCompile Include="InputError.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="MedicalStaff.cpp" />

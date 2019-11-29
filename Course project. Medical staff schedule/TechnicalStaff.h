@@ -18,6 +18,8 @@ public:
 	void chooseParameters();
 	string getParameter(int n);
 
+	virtual void table(std::ostream & out) override;
+
 	friend std::istream& operator >> (std::istream& in, TechnicalStaff& obj);
 	friend std::ostream& operator << (std::ostream& out, const TechnicalStaff& obj);
 
