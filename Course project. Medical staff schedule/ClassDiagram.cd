@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Staff">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARAQAAAEAABAAARAAESUAQkAACAAAAAAAAAgCERAFAA=</HashCode>
+      <FileName>Staff.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exception">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAgAABAAABAAAAAAAA=</HashCode>
+      <FileName>Exception.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputError">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAABAAAAAAAAAIAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>InputError.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MedicalStaff">
+    <Position X="1.75" Y="7.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EAAAAQAAAAAAAAAAAAAAAQAQAABAAAAAAAAAAAAAFAA=</HashCode>
+      <FileName>MedicalStaff.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TechnicalStaff">
+    <Position X="6.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAEAAAAAAACAAAAIAQAAAAAAAAAAAAAAAAAANAA=</HashCode>
+      <FileName>TechnicalStaff.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Doctor">
+    <Position X="0.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAIAACAAAAQAAAAAAIAQAAIAIAAAAFAA=</HashCode>
+      <FileName>Doctor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nurse">
+    <Position X="3" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAQAAAIAAAiAAAAIAAAAAFAA=</HashCode>
+      <FileName>Nurse.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ServiceStaff">
+    <Position X="5.25" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQACAAAAAAEAABgAAAAANAA=</HashCode>
+      <FileName>ServiceStaff.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdministrativeStaff">
+    <Position X="7.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAgAAAACQCBAAAAAAAAAAAAAAAAFAA=</HashCode>
+      <FileName>AdministrativeStaff.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="graphic" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAQAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Staff.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,219 @@
+#include "pch.h"
+#include "Staff.h"
+#include "InputError.h"
+#include <algorithm>
+
+std::istream & operator>>(std::istream & in, Staff & obj)
+{
+	cout << "Имя:";
+	inputLetters(in, obj.firstName);
+	cout << "Фамилия:";
+	inputLetters(in, obj.surname);
+	cout << "Отчество";
+	inputLetters(in, obj.fatherName);
+	cout << "График дежурств" << endl;
+	obj.inputGraphic(in, obj.duty_graphic);
+	cout << "График работы:" << endl;
+	obj.inputGraphic(in, obj.work_graphic);
+	return in;
+}
+
+std::ostream & operator<<(std::ostream & out, const Staff & obj)
+{
+	using namespace std;
+	out << setiosflags(ios::left) << setw(15) << obj.firstName << setw(20) << obj.surname << setw(20) << obj.fatherName;
+	return out;
+}
+
+
+void Staff::inputGraphic(std::istream & in, list<graphic>& list_graphic)
+{
+	int i;
+	do
+	{
+		string day;
+		graphic gr;
+		cout << "День недели:";
+		inputLetters(in, day);
+		list<graphic>::iterator it=list_graphic.begin();
+		while (it != list_graphic.end())
+		{
+			if ((*it).weekday == day)
+				cout << "\nДанный день недели уже существует в графике. Для изменения выполните операцию редактирования\n";
+			it++;;
+		}
+		cout << "Первый час=";
+		inputNumber(in, gr.hour1, 0, 24);
+		cout << "Последний час=";
+		inputNumber(in, gr.hour2, 0, 24);
+		
+
+		list_graphic.push_back(gr);
+
+		cout << "1-Ввести еще один день графика";
+		cout << "0-Закончить ввод графика";
+		cin >> i;
+
+	} while (i);
+}
+
+//void Staff::outputGraphic(std::istream & in, list<graphic>& list_graphic)
+//{
+//	list<graphic>::iterator it;
+//	int i=0;
+//	for (it = list_graphic.begin(); it != list_graphic.end(); it++, i++)
+//	{
+//		if ((*it).weekday == "Понедельник" && i==0) 
+//		{
+//			cout << setw(13) << (*it).hour1 - (*it).hour2;
+//			continue;
+//		}
+//
+//	}
+//}
+	
+
+void Staff::table(std::ostream & out)
+{
+	using namespace std;
+	out << setiosflags(ios::left) << setw(15) << "Имя" << setw(20) << "Фамилия" << setw(20) << "Отчество";
+}
+
+void Staff::tableGraphic(std::ostream & out)
+{
+	cout << setw(13) << "Понедельник" << setw(9) << "Вторник" << setw(6) << "Среда" << setw(9) << "Четверг" << setw(9)
+		<< "Пятница" << setw(9) << "Суббота" << setw(13) << "Воскресенье\n";
+}
+
+void Staff::chooseParameters()
+{
+	cout << "Выберите параметры для поиска:" << endl;
+	cout << "1-Имя" << endl;
+	cout << "2-Фамилия" << endl;
+	cout << "3-Отчество" << endl;
+	cout << "4-День недели в графике дежурств" << endl;
+	cout << "5-День недели в графике работы" << endl;
+}
+
+std::string Staff::getParameter(int n)
+{
+	switch (n)
+	{
+	case 1:
+		cout << "Имя:";
+		inputLetters(cin, firstName);
+		return "firstName";
+	case 2:
+		cout << "Фамилия:";
+		inputLetters(cin, surname);
+		return "surname";
+	case 3:
+		cout << "Отчество:";
+		inputLetters(cin, fatherName);
+		return "fatherName";
+	case 4:
+	{
+		cout << "День недели в графике дежурств:";
+		graphic gr;
+		inputLetters(cin, gr.weekday);
+		duty_graphic.push_back(gr);
+		return "weekdayDuty";
+	}
+	case 5:
+	{
+		cout << "День недели в графике работы:";
+		graphic gr;
+		inputLetters(cin, gr.weekday);
+		work_graphic.push_back(gr);
+		return "weekdayWork";
+	}
+	default:
+		return "";
+	}
+}
+
+bool Staff::operator!=(Staff & obj)
+{
+	return (!(*this == obj));
+}
+
+bool Staff::operator>(Staff & obj)
+{
+	if (surname != obj.surname)
+		return (surname > obj.surname);
+	else if (firstName != obj.surname)
+		return (firstName > obj.firstName);
+	else return fatherName > obj.fatherName;
+
+}
+
+bool Staff::operator<(Staff & obj)
+{
+	return (!(*this > obj));
+}
+
+bool Staff::operator==(Staff & obj)
+{
+	return (firstName == obj.firstName && surname == obj.surname && fatherName == obj.fatherName );
+}
+
+string Staff::getFirstName() const
+{
+	return firstName;
+}
+
+void Staff::setFirstName(string name)
+{
+	firstName = name;
+}
+
+string Staff::getSurname() const
+{
+	return surname;
+}
+
+void Staff::setSurname(string sur)
+{
+	surname = sur;
+}
+
+string Staff::getFatherName() const
+{
+	return fatherName;
+}
+
+void Staff::setFatherName(string fatherName_)
+{
+	fatherName = fatherName_;
+}
+
+int Staff::getHour1(string day, list<graphic>& gr) const
+{
+	list<graphic>::iterator iter = gr.begin();
+	for (; iter != gr.end(); iter++)
+		if (iter->weekday == day) return iter->hour1;
+	return -1;
+}
+
+void Staff::setHour1(string day, int hour, list<graphic>& gr)
+{
+	list<graphic>::iterator iter = gr.begin();
+	for (; iter != gr.end(); iter++)
+		if (iter->weekday == day) iter->hour1 = hour;
+}
+
+int Staff::getHour2(string day, list<graphic>& gr) const
+{
+	list<graphic>::iterator iter = gr.begin();
+	for (; iter != gr.end(); iter++)
+		if (iter->weekday == day) return iter->hour2;
+	return -1;
+}
+
+void Staff::setHour2(string day, int hour, list<graphic>& gr)
+{
+	list<graphic>::iterator iter = gr.begin();
+	for (; iter != gr.end(); iter++)
+		if (iter->weekday == day) iter->hour2 = hour;
+	
+}
