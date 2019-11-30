@@ -36,6 +36,7 @@ public:
 	virtual void graphicLines(std::ostream& out);
 	void tableGraphic(std::ostream & out);
 	void outputGraphic(std::ostream & out, bool flag);
+	
 
 	virtual void chooseParameters();
 	virtual std::string getParameter(int n);

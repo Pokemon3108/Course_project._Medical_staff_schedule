@@ -8,7 +8,7 @@ class InputError : public Exception
 protected:
 	int code;
 public:
-	InputError(int c, std::string text) : Exception(text), code(c)
+	InputError(int c, string text) : Exception(text), code(c)
 	{}
 	~InputError()
 	{};
@@ -17,8 +17,9 @@ public:
 };
 
 
-void inputLetters(std::istream& in, std::string& str) throw (InputError&);
-void inputLettersAndNumbers(std::istream& in, std::string& str) throw (InputError&);
+void inputLetters(std::istream& in, string& str) throw (InputError&);
+void inputLettersAndNumbers(std::istream& in, string& str) throw (InputError&);
+void inputWeekDay(std::istream& in, string& str) throw (InputError&);
 
 
 template<typename T>
@@ -35,7 +36,7 @@ void inputNumber(std::istream& in, T&n, T range1, T range2)
 				throw InputError(1, "Было введено не число");
 
 			if (n<range1 || n>range2)
-				throw InputError(5, "Введённое число не принадлежит заданному диапазону");
+				throw InputError(5, "Введённое число не принадлежит заданному диапазону. Проверьте, возможно первый час работы оказался больше последнего");
 
 		}
 		catch (InputError& exception)

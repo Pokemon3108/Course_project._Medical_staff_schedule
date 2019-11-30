@@ -5,7 +5,7 @@ std::istream & operator>>(std::istream & in, Doctor & obj)
 {
 	in >> dynamic_cast<MedicalStaff&>(obj);
 	cout << "Категория:";
-	inputLetters(in, obj.category);
+	inputLettersAndNumbers(in, obj.category);
 	cout << "Специальность:";
 	inputLetters(in, obj.speciality);
 	return in;

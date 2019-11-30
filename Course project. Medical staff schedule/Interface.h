@@ -8,13 +8,6 @@
 #include "Tree.h"
 #include "Algorithm.h"
 
-
-
-using std::cout;
-using std::endl;
-using std::cin;
-
-
 template <typename T>
 class Interface
 {
@@ -85,7 +78,7 @@ void Interface<T>::menu()
 }
 
 template<typename T>
-inline bool Interface<T>::action()
+bool Interface<T>::action()
 {
 	Tree<T> tree;
 	int n;
@@ -98,7 +91,8 @@ inline bool Interface<T>::action()
 		cout << "5-Найти объекты по всем параметрам" << endl;
 		cout << "6-Найти объект по выбранным параметрам" << endl;
 		cout << "7-Количество объектов" << endl;
-		cout << "8-Осуществить операции с объектами других классов" << endl;
+		cout << "8-Отредактировать объект" << endl;
+		cout << "9-Осуществить операции с объектами других классов" << endl;
 		cout << "0-Конец программы" << endl;
 		cin >> n;
 
@@ -120,7 +114,7 @@ inline bool Interface<T>::action()
 			T obj;
 			int a;
 			cout << "1-График работы" << endl << "2-График дежурств" << endl;
-			cin >> a;
+			inputNumber(cin, a, 1, 2);
 			obj.tableLines(cout);
 			obj.table(cout);
 			obj.tableGraphic(cout);
@@ -133,7 +127,9 @@ inline bool Interface<T>::action()
 				tree.show(1);
 				break;
 			}
+			obj.tableLines(cout);
 			break;
+			
 		}
 
 		case 3:
@@ -182,6 +178,13 @@ inline bool Interface<T>::action()
 			break;
 		}
 		case 8:
+		{
+			/*T obj;
+			cin >> dynamic_cast<Staff&> (obj);
+			break;*/
+			//добавить редактирование объектов
+		}
+		case 9:
 			return 1;
 		case 0:
 			return 0;
@@ -207,16 +210,5 @@ void Interface<T>::searchMenu(T& obj, Functor & f)
 	} while (i);
 	f = func;
 }
-
-
-//template<typename T>
-//void Interface<T>::informationForOutput()
-//{
-//	T obj;
-//	obj.tableLines(cout);
-//	obj.table(cout);
-//	obj.tableGraphic(cout);
-//	tree.showInOrder(tree.getRoot());
-//}
 
 

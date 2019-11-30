@@ -36,7 +36,7 @@ void Staff::inputGraphic(std::istream & in, list<graphic>& list_graphic)
 		string day;
 		graphic gr;
 		cout << "День недели:";
-		inputLetters(in, day);
+		inputWeekDay(in, day);
 		list<graphic>::iterator it=list_graphic.begin();
 		while (it != list_graphic.end())
 		{
@@ -53,7 +53,7 @@ void Staff::inputGraphic(std::istream & in, list<graphic>& list_graphic)
 			cout << "Первый час=";
 			inputNumber(in, gr.hour1, 0, 24);
 			cout << "Последний час=";
-			inputNumber(in, gr.hour2, 0, 24);
+			inputNumber(in, gr.hour2, gr.hour1, 24);
 			list_graphic.push_back(gr);
 		}
 		
@@ -69,12 +69,12 @@ void Staff::outputGraphic(std::ostream & out, bool flag)
 	list<graphic> list_graphic;
 	if (!flag) list_graphic = this->duty_graphic;
 	else list_graphic = this->work_graphic;
-	bool f;
+	bool fl;
 	list<graphic>::iterator it1, it2;
 	int i = 1;
 	for (; i<8; ++i)
 	{
-		f = 1;
+		fl = 1;
 		for (it2 = list_graphic.begin(); it2 != list_graphic.end(); ++it2)
 		{
 			string time = std::to_string(it2->hour1) + "-" + std::to_string(it2->hour2);
@@ -84,14 +84,14 @@ void Staff::outputGraphic(std::ostream & out, bool flag)
 				(it2->weekday == "Пятница" && i == 5) || (it2->weekday == "Суббота" && i == 6) || 
 				(it2->weekday == "Воскресенье" && i == 7))
 			{
-				f = 0;
+				fl = 0;
 				out << std::setiosflags(std::ios::left) << setw(11) << time << '|';
 				break;
 			}
 
 		}
 		
-		if (f) out << setw(11) << ' ' << '|';
+		if (fl) out << setw(11) << ' ' << '|';
 	}
 }
 	
