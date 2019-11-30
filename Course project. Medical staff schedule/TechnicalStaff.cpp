@@ -33,7 +33,7 @@ std::ostream & operator<<(std::ostream & out, const TechnicalStaff & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const Staff&>(obj);
-	out << setiosflags(ios::left) << setw(20) << obj.profession;
+	out << setiosflags(ios::left) << setw(19) << obj.profession<<'|';
 	return out;
 }
 
@@ -65,5 +65,12 @@ string TechnicalStaff::getParameter(int n)
 void TechnicalStaff::table(std::ostream & out)
 {
 	Staff::table(out);
-	out << std::setiosflags(std::ios::left) << setw(20) << "Профессия";
+	out << std::setiosflags(std::ios::left) << setw(20) << "|Профессия";
+}
+
+void TechnicalStaff::tableLines(std::ostream & out) const
+{
+	Staff::tableLines(out);
+	string str1(19, '-');
+	out << str1 << '+';
 }

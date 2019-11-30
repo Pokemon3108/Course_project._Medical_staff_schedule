@@ -13,4 +13,5 @@ using std::string;
 using std::cout;
 using std::cin;
 using std::setw;
+using std::cerr;
 #endif 

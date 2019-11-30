@@ -3,7 +3,7 @@
 #include <string>
 
 using std::endl;
-using std::cerr;
+
 
 
 void inputLetters(std::istream& in, std::string & str) throw(InputError &)
@@ -18,7 +18,7 @@ void inputLetters(std::istream& in, std::string & str) throw(InputError &)
 			std::getline(in, str);
 			for (size_t i = 0; i < str.length(); ++i)
 			{
-				if (str[i]<'А' && str[i]>'я' && str[i] != ' '&& str[i] != '-')
+				if ((str[i]<'А' || str[i]>'я') && str[i] != ' '&& str[i] != '-')
 				{
 					throw InputError(3, "В введённой строке должны содержаться только буквы и дефисы");
 				}
@@ -27,7 +27,7 @@ void inputLetters(std::istream& in, std::string & str) throw(InputError &)
 		catch (InputError& exception)
 		{
 			flag = 0;
-			cerr << "Code:" << exception.getCode() << endl << "Description:" << exception.what() << endl;
+			cerr << "Код:" << exception.getCode() << endl << "Описание:" << exception.what() << endl;
 			str.clear();
 		}
 	} while (!flag);
@@ -56,7 +56,7 @@ void inputLettersAndNumbers(std::istream& in, std::string & str) throw(InputErro
 			for (size_t i = 0; i < str.length(); ++i)
 			{
 
-				if (str[i]<'А' && str[i]>'я' && (str[i] < '0' || str[i]>'9') && str[i] != ' ' && str[i] != '-')
+				if ((str[i]<'А' || str[i]>'я') && (str[i] < '0' || str[i]>'9') && str[i] != ' ' && str[i] != '-')
 				{
 
 					throw InputError(4, "В строке могут содержаться буквы,цифры и дефисы");
@@ -66,7 +66,7 @@ void inputLettersAndNumbers(std::istream& in, std::string & str) throw(InputErro
 		catch (InputError& exception)
 		{
 			flag = 0;
-			cerr << "Code:" << exception.getCode() << endl << "Description:" << exception.what() << endl;
+			cerr << "Код:" << exception.getCode() << endl << "Описание:" << exception.what() << endl;
 			str.clear();
 		}
 	} while (!flag);

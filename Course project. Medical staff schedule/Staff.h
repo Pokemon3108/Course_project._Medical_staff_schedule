@@ -32,8 +32,10 @@ public:
 
 	void inputGraphic(std::istream& in, list<graphic>& list_graphic);
 	virtual void table(std::ostream & out);
+	virtual void tableLines(std::ostream& out) const;
+	virtual void graphicLines(std::ostream& out);
 	void tableGraphic(std::ostream & out);
-	void outputGraphic(std::ostream & out, list<graphic>& list_graphic);
+	void outputGraphic(std::ostream & out, bool flag);
 
 	virtual void chooseParameters();
 	virtual std::string getParameter(int n);

@@ -3,9 +3,6 @@
 #include "Exception.h"
 #include <string>
 
-using std::endl;
-using std::cerr;
-
 class InputError : public Exception
 {
 protected:
@@ -44,7 +41,7 @@ void inputNumber(std::istream& in, T&n, T range1, T range2)
 		catch (InputError& exception)
 		{
 			flag = 0;
-			cerr << "Code:" << exception.getCode() << endl << "Description:" << exception.what() << endl;
+			cerr << "Код:" << exception.getCode() << endl << "Описание:" << exception.what() << endl;
 			in.clear();
 			rewind(stdin);
 		}

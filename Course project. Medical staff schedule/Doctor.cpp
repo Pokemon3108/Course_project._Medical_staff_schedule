@@ -15,7 +15,7 @@ std::ostream & operator<<(std::ostream & out, const Doctor & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const MedicalStaff&>(obj);
-	out << setiosflags(ios::left) << setw(11) << obj.category<<setw(20)<<obj.speciality;
+	out << setiosflags(ios::left) << setw(10) << obj.category<<'|'<<setw(19)<<obj.speciality<<'|';
 	return out;
 }
 
@@ -54,7 +54,18 @@ void Doctor::table(std::ostream & out)
 {
 	using namespace std;
 	MedicalStaff::table(out);
-	out << setiosflags(ios::left) << setw(11) << "Категория" << setw(20) << "Специальность";
+	out << setiosflags(ios::left) << setw(11) << "|Категория" << setw(20) << "|Специальность";
+}
+
+void Doctor::tableLines(std::ostream & out) const
+{
+	MedicalStaff::tableLines(out);
+	string str1(10, '-');
+	string str2(19, '-');
+	out << str1 << '+' << str2 << '+';
+	Doctor obj;
+	obj.graphicLines(out);
+	
 }
 
 void Doctor::chooseParameters()

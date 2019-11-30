@@ -28,11 +28,12 @@ public:
 	void menu();
 	bool action();
 	void searchMenu(T& obj, Functor& f);
+	//void chooseGraphicType();
 	friend class Functor;
 };
 
 template<typename T>
-inline void Interface<T>::menu()
+void Interface<T>::menu()
 {
 
 	int n;
@@ -91,7 +92,7 @@ inline bool Interface<T>::action()
 	do
 	{
 		cout << "\n1-Добавить объект" << endl;
-		cout << "2-Вывести все объекты" << endl;
+		cout << "2-Вывести информацию о всех объектах" << endl;
 		cout << "3-Удалить объект" << endl;
 		cout << "4-Удалить всё" << endl;
 		cout << "5-Найти объекты по всем параметрам" << endl;
@@ -117,9 +118,21 @@ inline bool Interface<T>::action()
 		case 2:
 		{
 			T obj;
+			int a;
+			cout << "1-График работы" << endl << "2-График дежурств" << endl;
+			cin >> a;
+			obj.tableLines(cout);
 			obj.table(cout);
-			tree.showInOrder(tree.getRoot());
-			//добавить вывод графика дежурств
+			obj.tableGraphic(cout);
+			switch (a)
+			{
+			case 1:
+				tree.show(0);
+				break;
+			case 2:
+				tree.show(1);
+				break;
+			}
 			break;
 		}
 
@@ -194,5 +207,16 @@ void Interface<T>::searchMenu(T& obj, Functor & f)
 	} while (i);
 	f = func;
 }
+
+
+//template<typename T>
+//void Interface<T>::informationForOutput()
+//{
+//	T obj;
+//	obj.tableLines(cout);
+//	obj.table(cout);
+//	obj.tableGraphic(cout);
+//	tree.showInOrder(tree.getRoot());
+//}
 
 

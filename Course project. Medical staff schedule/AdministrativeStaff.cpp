@@ -14,7 +14,7 @@ std::ostream & operator<<(std::ostream & out, const AdministrativeStaff & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const TechnicalStaff&>(obj);
-	out << setiosflags(ios::left) << setw(8) << obj.roomNumber;
+	out << setiosflags(ios::left) << setw(7) << obj.roomNumber<<'|';
 	return out;
 }
 
@@ -71,5 +71,14 @@ string AdministrativeStaff::getParameter(int n)
 void AdministrativeStaff::table(std::ostream & out)
 {
 	TechnicalStaff::table(out);
-	out << std::setiosflags(std::ios::left) << setw(8) << "Кабинет";
+	out << std::setiosflags(std::ios::left) << setw(8) << "|Кабинет";
+}
+
+void AdministrativeStaff::tableLines(std::ostream & out) const
+{
+	TechnicalStaff::tableLines(out);
+	string str1(7, '-');
+	out << str1 << '+';
+	AdministrativeStaff obj;
+	obj.graphicLines(out);
 }

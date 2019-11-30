@@ -34,14 +34,22 @@ std::ostream & operator<<(std::ostream & out, const MedicalStaff & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const Staff&>(obj);
-	out << setiosflags(ios::left) << setw(20) << obj.department;
+	out << setiosflags(ios::left) << setw(19) << obj.department<<'|';
 	return out;
+	
 }
 
 void MedicalStaff::table(std::ostream & out)
 {
 	Staff::table(out);
-	out << std::setiosflags(std::ios::left) << setw(20) << "Отделение";
+	out << std::setiosflags(std::ios::left)<< setw(20) << "|Отделение";
+}
+
+void MedicalStaff::tableLines(std::ostream & out) const
+{
+	Staff::tableLines(out);
+	string str1(19, '-');
+	out << str1 << '+';
 }
 
 

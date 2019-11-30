@@ -20,8 +20,10 @@ std::istream & operator>>(std::istream & in, Staff & obj)
 
 std::ostream & operator<<(std::ostream & out, const Staff & obj)
 {
+	obj.tableLines(out);
 	using namespace std;
-	out << setiosflags(ios::left) << setw(15) << obj.firstName << setw(20) << obj.surname << setw(20) << obj.fatherName;
+	out << setiosflags(ios::left) << '|'<<setw(14) << obj.firstName <<'|'<< setw(19)  << obj.surname <<'|'<< setw(19) 
+		<< obj.fatherName<<'|';
 	return out;
 }
 
@@ -39,11 +41,15 @@ void Staff::inputGraphic(std::istream & in, list<graphic>& list_graphic)
 		while (it != list_graphic.end())
 		{
 			if ((*it).weekday == day)
+			{
 				cout << "\nДанный день недели уже существует в графике. Для изменения выполните операцию редактирования\n";
+				it = list_graphic.end();
+			}
 			it++;
 		}
 		if (it==list_graphic.end())
 		{
+			gr.weekday = day;
 			cout << "Первый час=";
 			inputNumber(in, gr.hour1, 0, 24);
 			cout << "Последний час=";
@@ -58,54 +64,61 @@ void Staff::inputGraphic(std::istream & in, list<graphic>& list_graphic)
 	} while (i);
 }
 
-void Staff::outputGraphic(std::ostream & out, list<graphic>& list_graphic)
+void Staff::outputGraphic(std::ostream & out, bool flag)
 {
+	list<graphic> list_graphic;
+	if (!flag) list_graphic = this->duty_graphic;
+	else list_graphic = this->work_graphic;
+	bool f;
 	list<graphic>::iterator it1, it2;
 	int i = 1;
-	for (it1 = list_graphic.begin(); it1 != list_graphic.end(); ++it1, ++i)
+	for (; i<8; ++i)
 	{
+		f = 1;
 		for (it2 = list_graphic.begin(); it2 != list_graphic.end(); ++it2)
 		{
 			string time = std::to_string(it2->hour1) + "-" + std::to_string(it2->hour2);
 			
-			if (it2->weekday == "Понедельник" && i == 1)
-				out << std::setiosflags(std::ios::left) << setw(13) << time;
+			if ((it2->weekday == "Понедельник" && i == 1) || (it2->weekday == "Вторник" && i == 2) || 
+				(it2->weekday == "Среда" && i == 3) || (it2->weekday == "Четверг" && i == 4) ||
+				(it2->weekday == "Пятница" && i == 5) || (it2->weekday == "Суббота" && i == 6) || 
+				(it2->weekday == "Воскресенье" && i == 7))
+			{
+				f = 0;
+				out << std::setiosflags(std::ios::left) << setw(11) << time << '|';
+				break;
+			}
 
-			else if (it2->weekday == "Вторник" && i == 2)
-				out << std::setiosflags(std::ios::left) << setw(9) << time;
-
-			else if (it2->weekday == "Среда" && i == 3)
-				out << std::setiosflags(std::ios::left) << setw(6) << time;
-
-			else if (it2->weekday == "Четверг" && i == 4)
-				out << std::setiosflags(std::ios::left) << setw(9) << time;
-
-			else if (it2->weekday == "Пятница" && i == 5)
-				out << std::setiosflags(std::ios::left) << setw(9) << time;
-
-			else if (it2->weekday == "Суббота" && i == 6)
-				out << std::setiosflags(std::ios::left) << setw(9) << time;
-
-			else if (it2->weekday == "Воскресенье" && i == 7)
-				out << std::setiosflags(std::ios::left) << setw(13) << time;
-
-			else out << setw(13) << ' ' << endl;
 		}
-
+		
+		if (f) out << setw(11) << ' ' << '|';
 	}
 }
 	
-
 void Staff::table(std::ostream & out)
 {
 	using namespace std;
-	out << setiosflags(ios::left) << setw(15) << "Имя" << setw(20) << "Фамилия" << setw(20) << "Отчество";
+	out << setiosflags(ios::left) << setw(15) << "|Имя" << setw(20) << "|Фамилия" << setw(20) << "|Отчество";
+}
+
+void Staff::tableLines(std::ostream & out) const
+{
+	out << '+';
+	string str1(14, '-');
+	string str2(19, '-');
+	out << str1 << '+' << str2 << '+' << str2 << '+';
+}
+
+void Staff::graphicLines(std::ostream & out)
+{
+	string str1(11, '-');
+	out << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+' << endl;
 }
 
 void Staff::tableGraphic(std::ostream & out)
 {
-	cout << setw(13) << "Понедельник" << setw(9) << "Вторник" << setw(6) << "Среда" << setw(9) << "Четверг" << setw(9)
-		<< "Пятница" << setw(9) << "Суббота" << setw(13) << "Воскресенье\n";
+	cout << setw(12) << "|Понедельник" << setw(12) << "|Вторник" << setw(12) << "|Среда" << setw(12) << "|Четверг" << setw(12)
+		<< "|Пятница" << setw(12) << "|Суббота" << setw(12) << "|Воскресенье"<<'|'<<endl;
 }
 
 void Staff::chooseParameters()

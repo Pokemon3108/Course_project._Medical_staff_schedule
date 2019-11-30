@@ -13,14 +13,23 @@ std::ostream & operator<<(std::ostream & out, const ServiceStaff & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const TechnicalStaff&>(obj);
-	out << setiosflags(ios::left) << setw(20) << obj.workPlace;
+	out << setiosflags(ios::left) << setw(19) << obj.workPlace<<'|';
 	return out;
 }
 
 void ServiceStaff::table(std::ostream & out)
 {
 	TechnicalStaff::table(out);
-	out << std::setiosflags(std::ios::left) << setw(20) << "Рабочая область";
+	out << std::setiosflags(std::ios::left) << setw(20) << "|Рабочая область";
+}
+
+void ServiceStaff::tableLines(std::ostream & out) const
+{
+	TechnicalStaff::tableLines(out);
+	string str1(19, '-');
+	out << str1 << '+';
+	ServiceStaff obj;
+	obj.graphicLines(out);
 }
 
 void ServiceStaff::chooseParameters()

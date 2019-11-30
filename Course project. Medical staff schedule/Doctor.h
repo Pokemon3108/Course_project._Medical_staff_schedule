@@ -20,6 +20,7 @@ public:
 	friend std::ostream& operator << (std::ostream& out, const Doctor& obj);
 
 	virtual void table(std::ostream & out) override;
+	virtual void tableLines(std::ostream& out)const override;
 
 	virtual void chooseParameters() override;
 	virtual string getParameter(int n) override;

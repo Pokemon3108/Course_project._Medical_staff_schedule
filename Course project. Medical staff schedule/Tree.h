@@ -70,8 +70,8 @@ public:
 
 	Node<T> * search(T & obj) const;
 
-	void showInOrder(Node<T>* root) const;
-	void show(Node<T>* root, int level = 0);
+	//void showInOrder(Node<T>* root, int a=0) const;
+	void show(bool flag);
 
 	void pop(T obj);
 	void deleteItem(Node<T>* &ptr, T data);
@@ -130,25 +130,28 @@ Node<T>* Tree<T>::search(T & obj) const
 	return temp;
 }
 
-template <typename T>
-void Tree<T>::showInOrder(Node<T>* root) const
-{
-	if (!root) return;
-	showInOrder(root->left);
-	std::cout << root->data;
-	showInOrder(root->right);
-
-}
+//template <typename T>
+//void Tree<T>::showInOrder(Node<T>* root, int a) const
+//{
+//	/*if (!root) return;
+//	showInOrder(root->left);
+//	std::cout << root->data;
+//	if (a==1) 
+//	showInOrder(root->right);*/
+//
+//
+//}
 
 template<typename T>
-void Tree<T>::show(Node<T>* root, int level)
+void Tree<T>::show(bool flag)
 {
-	if (root)
+	Iterator it;
+	for (it = begin(); it != end(); it++)
 	{
-		show(root->left, level + 1);
-		for (int i = 0; i < level; i++) cout << "   ";
-		cout << root->data << endl;
-		show(root->right, level + 1);
+		cout << *it;
+		if (!flag) (*it).outputGraphic(cout,flag);
+		else (*it).outputGraphic(cout,1);
+		cout <<  endl;
 	}
 }
 

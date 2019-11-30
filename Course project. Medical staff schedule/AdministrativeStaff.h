@@ -23,6 +23,7 @@ public:
 	virtual string getParameter(int n) override;
 
 	virtual void table(std::ostream & out) override;
+	virtual void tableLines(std::ostream& out) const override;
 
 	bool operator==(AdministrativeStaff& obj);
 	bool operator!=(AdministrativeStaff& obj);

@@ -14,7 +14,7 @@ std::ostream & operator<<(std::ostream & out, const Nurse & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const MedicalStaff&>(obj);
-	out << setiosflags(ios::left) << setw(20) << obj.workprofile;
+	out << setiosflags(ios::left) << setw(19) << obj.workprofile<<'|';
 	return out;
 }
 
@@ -43,7 +43,16 @@ void Nurse::table(std::ostream & out)
 {
 	using namespace std;
 	MedicalStaff::table(out);
-	out << setiosflags(ios::left) << setw(20) << "Профиль работы";
+	out << setiosflags(ios::left) << setw(20) << "|Профиль работы";
+}
+
+void Nurse::tableLines(std::ostream & out) const
+{
+	MedicalStaff::tableLines(out);
+	string str(19, '-');
+	out << str << '+';
+	Nurse obj;
+	obj.graphicLines(out);
 }
 
 void Nurse::chooseParameters()
