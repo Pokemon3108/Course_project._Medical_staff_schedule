@@ -24,10 +24,10 @@ bool AdministrativeStaff::operator==(AdministrativeStaff & obj)
 		&& obj.roomNumber == roomNumber);
 }
 
-bool AdministrativeStaff::operator!=(AdministrativeStaff & obj)
-{
-	return (!(*this == obj));
-}
+//bool AdministrativeStaff::operator!=(AdministrativeStaff & obj)
+//{
+//	return (!(*this == obj));
+//}
 
 string AdministrativeStaff::getRoomNumber()
 {
@@ -42,7 +42,7 @@ void AdministrativeStaff::setRoomNumber(string room)
 void AdministrativeStaff::chooseParameters()
 {
 	TechnicalStaff::chooseParameters();
-	cout << "7-Кабинет:" << endl;
+	cout << "7-Кабинет" << endl;
 }
 
 string AdministrativeStaff::getParameter(int n)
@@ -81,4 +81,14 @@ void AdministrativeStaff::tableLines(std::ostream & out) const
 	out << str1 << '+';
 	AdministrativeStaff obj;
 	obj.graphicLines(out);
+}
+
+void AdministrativeStaff::edit(int n)
+{
+	TechnicalStaff::edit(n);
+	if (n == 7)
+	{
+		std::cout << "Кабинет:";
+		inputLetters(cin, roomNumber);
+	}
 }

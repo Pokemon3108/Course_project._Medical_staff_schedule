@@ -7,10 +7,10 @@ bool MedicalStaff::operator==(MedicalStaff & obj)
 	return (dynamic_cast<Staff&>(obj) == *(dynamic_cast<Staff*>(this)) && obj.department == department);
 }
 
-bool MedicalStaff::operator!=(MedicalStaff & obj)
-{
-	return (!(*this == obj));
-}
+//bool MedicalStaff::operator!=(MedicalStaff & obj)
+//{
+//	return (!(*this == obj));
+//}
 
 string MedicalStaff::getDepartment() const
 {
@@ -76,4 +76,14 @@ std::string MedicalStaff::getParameter(int n)
 		}
 	}
 	else return parameter;
+}
+
+void MedicalStaff::edit(int n)
+{
+	Staff::edit(n);
+	if (n == 6)
+	{
+		std::cout << "Отделение:";
+		inputLetters(cin, department);
+	}
 }

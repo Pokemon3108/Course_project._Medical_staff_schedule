@@ -5,7 +5,7 @@
 std::istream & operator>>(std::istream & in, Nurse & obj)
 {
 	in >> dynamic_cast<MedicalStaff&>(obj);
-	cout << "Должность:";
+	cout << "Профиль работы:";
 	inputLetters(in, obj.workprofile);
 	return in;
 }
@@ -24,10 +24,10 @@ bool Nurse::operator==(Nurse & obj)
 		&& obj.workprofile == workprofile);
 }
 
-bool Nurse::operator!=(Nurse & obj)
-{
-	return (!(*this == obj));
-}
+//bool Nurse::operator!=(Nurse & obj)
+//{
+//	return (!(*this == obj));
+//}
 
 void Nurse::setWorkProfile(string profile)
 {
@@ -83,4 +83,14 @@ string Nurse::getParameter(int n)
 		}
 	} while (i);
 	return parameter;
+}
+
+void Nurse::edit(int n)
+{
+	MedicalStaff::edit(n);
+	if (n == 7)
+	{
+		std::cout << "Профиль работы:";
+		inputLetters(cin, workprofile);
+	}
 }

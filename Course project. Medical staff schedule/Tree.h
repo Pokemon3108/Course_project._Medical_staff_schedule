@@ -118,7 +118,7 @@ Node<T>* Tree<T>::search(T & obj) const
 {
 	if (!root) return nullptr;
 	Node<T>* temp = root;
-	while (temp->data != obj && temp)
+	while (temp && temp->data != obj)
 	{
 		if (obj < temp->data)
 			temp = temp->left;
@@ -149,8 +149,7 @@ void Tree<T>::show(bool flag)
 	for (it = begin(); it != end(); it++)
 	{
 		cout << *it;
-		if (!flag) (*it).outputGraphic(cout,flag);
-		else (*it).outputGraphic(cout,1);
+		(*it).outputGraphic(cout,flag);
 		cout <<  endl;
 	}
 }

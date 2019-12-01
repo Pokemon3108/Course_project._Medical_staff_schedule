@@ -25,8 +25,10 @@ public:
 	virtual void table(std::ostream & out) override;
 	virtual void tableLines(std::ostream& out) const override;
 
+	virtual void edit(int n) override;
+
 	bool operator==(AdministrativeStaff& obj);
-	bool operator!=(AdministrativeStaff& obj);
+	//bool operator!=(AdministrativeStaff& obj);
 
 	string getRoomNumber();
 	void setRoomNumber(string room);

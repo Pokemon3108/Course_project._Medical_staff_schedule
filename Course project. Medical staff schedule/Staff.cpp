@@ -43,7 +43,7 @@ void Staff::inputGraphic(std::istream & in, list<graphic>& list_graphic)
 			if ((*it).weekday == day)
 			{
 				cout << "\nДанный день недели уже существует в графике. Для изменения выполните операцию редактирования\n";
-				it = list_graphic.end();
+				break;
 			}
 			it++;
 		}
@@ -59,7 +59,7 @@ void Staff::inputGraphic(std::istream & in, list<graphic>& list_graphic)
 		
 
 	cout << "1-Ввести еще один день графика"<<endl<< "0-Закончить ввод графика"<<endl;
-	in >> i;
+	inputNumber(cin,i,0,1);
 
 	} while (i);
 }
@@ -123,7 +123,7 @@ void Staff::tableGraphic(std::ostream & out)
 
 void Staff::chooseParameters()
 {
-	cout << "Выберите параметры для поиска:" << endl;
+	
 	cout << "1-Имя" << endl;
 	cout << "2-Фамилия" << endl;
 	cout << "3-Отчество" << endl;
@@ -167,6 +167,74 @@ std::string Staff::getParameter(int n)
 		return "";
 	}
 }
+
+void Staff::edit(int n)
+{
+	switch (n)
+	{
+	case 1:
+		cout << "Имя:";
+		inputLetters(cin, firstName); 
+		break;
+	case 2:
+		cout << "Фамилия:";
+		inputLetters(cin, surname);
+		break;
+
+	case 3:
+		cout << "Отчество:";
+		inputLetters(cin, fatherName);
+		break;
+
+	case 4:
+	{
+		cout << "День недели в графике дежурств:";
+		string day;
+		inputLetters(cin, day);
+		editGraphic(day, 0);
+		break;
+	}
+	case 5:
+	{
+		cout << "День недели в графике работы:";
+		string day;
+		inputLetters(cin, day);
+		editGraphic(day, 1);
+		break;
+	}
+	}
+}
+
+void Staff::editGraphic(string day, int listType)
+{
+	cout << "1-Отредактировать день" << endl << "0-Удалить день" << endl;
+	int operation;
+	inputNumber(cin, operation, 0, 1);
+	
+	list<graphic> l;
+	if (listType) l = work_graphic;
+	else l = duty_graphic;
+	list<graphic>::iterator it;
+	for (it = l.begin(); it != l.end(); ++it)
+	{
+		if (operation && it->weekday == day)
+		{
+			cout << "Первый час=";
+			inputNumber(cin, it->hour1, 0, 24);
+			cout << "Последний час=";
+			inputNumber(cin, it->hour2, it->hour1, 24);
+			break;
+		}
+		else if (!operation && it->weekday == day)
+		{
+			l.erase(it);
+			break;
+		}
+	}
+	if (listType) work_graphic=l;
+	else  duty_graphic=l;
+}
+
 
 bool Staff::operator!=(Staff & obj)
 {

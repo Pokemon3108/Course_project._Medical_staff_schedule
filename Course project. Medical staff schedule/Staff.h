@@ -41,6 +41,10 @@ public:
 	virtual void chooseParameters();
 	virtual std::string getParameter(int n);
 
+	virtual void edit(int n);
+	void editGraphic(string day, int listType);
+	
+
 	bool operator !=(Staff& obj);
 	bool operator >(Staff& obj);
 	bool operator <(Staff& obj);

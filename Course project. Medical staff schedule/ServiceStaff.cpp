@@ -5,7 +5,7 @@ std::istream & operator>>(std::istream & in, ServiceStaff & obj)
 {
 	in >> dynamic_cast<TechnicalStaff&>(obj);
 	cout << "Рабочая область:";
-	inputLetters(in, obj.workPlace);
+	inputLettersAndNumbers(in, obj.workPlace);
 	return in;
 }
 
@@ -32,10 +32,20 @@ void ServiceStaff::tableLines(std::ostream & out) const
 	obj.graphicLines(out);
 }
 
+void ServiceStaff::edit(int n)
+{
+	TechnicalStaff::edit(n);
+	if (n == 7)
+	{
+		std::cout << "Рабочая область:";
+		inputLetters(cin, workPlace);
+	}
+}
+
 void ServiceStaff::chooseParameters()
 {
 	TechnicalStaff::chooseParameters();
-	cout << "7-Закрепленный участок работы" << endl;
+	cout << "7-Рабочая область" << endl;
 }
 
 string ServiceStaff::getParameter(int n)
@@ -50,7 +60,7 @@ string ServiceStaff::getParameter(int n)
 			switch (n)
 			{
 			case 7:
-				std::cout << "Закрепленный участок работы:";
+				std::cout << "Рабочая область:";
 				inputLettersAndNumbers(cin, workPlace);
 				return "workPlace";
 			default:
@@ -67,10 +77,10 @@ bool ServiceStaff::operator==(ServiceStaff & obj)
 		
 }
 
-bool ServiceStaff::operator!=(ServiceStaff & obj)
-{
-	return (!(*this == obj));
-}
+//bool ServiceStaff::operator!=(ServiceStaff & obj)
+//{
+//	return (!(*this == obj));
+//}
 
 string ServiceStaff::getWorkPlace()
 {

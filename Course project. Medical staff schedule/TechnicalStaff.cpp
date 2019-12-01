@@ -1,15 +1,25 @@
 #include "pch.h"
 #include "TechnicalStaff.h"
 
+void TechnicalStaff::edit(int n)
+{
+	Staff::edit(n);
+	if (n == 6)
+	{
+		std::cout << "Должность:";
+		inputLetters(cin, profession);
+	}
+}
+
 bool TechnicalStaff::operator==(TechnicalStaff & obj)
 {
 	return (dynamic_cast<Staff&>(obj) == *(dynamic_cast<Staff*>(this)) && obj.profession==profession);
 }
 
-bool TechnicalStaff::operator!=(TechnicalStaff & obj)
-{
-	return (!(*this == obj));
-}
+//bool TechnicalStaff::operator!=(TechnicalStaff & obj)
+//{
+//	return (!(*this == obj));
+//}
 
 string TechnicalStaff::getProfession()
 {
@@ -65,7 +75,7 @@ string TechnicalStaff::getParameter(int n)
 void TechnicalStaff::table(std::ostream & out)
 {
 	Staff::table(out);
-	out << std::setiosflags(std::ios::left) << setw(20) << "|Профессия";
+	out << std::setiosflags(std::ios::left) << setw(20) << "|Должность";
 }
 
 void TechnicalStaff::tableLines(std::ostream & out) const

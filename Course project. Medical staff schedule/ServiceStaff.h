@@ -20,11 +20,13 @@ public:
 	virtual void table(std::ostream & out) override;
 	virtual void tableLines(std::ostream& out) const override;
 
+	virtual void edit(int n) override;
+
 	virtual void chooseParameters() override;
 	virtual string getParameter(int n) override;
 
 	bool operator==(ServiceStaff& obj);
-	bool operator!=(ServiceStaff& obj);
+	//bool operator!=(ServiceStaff& obj);
 
 	string getWorkPlace();
 	void setWorkPlace(string place);

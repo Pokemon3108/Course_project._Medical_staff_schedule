@@ -113,20 +113,12 @@ bool Interface<T>::action()
 		{
 			T obj;
 			int a;
-			cout << "1-График работы" << endl << "2-График дежурств" << endl;
-			inputNumber(cin, a, 1, 2);
+			cout << "1-График работы" << endl << "0-График дежурств" << endl;
+			inputNumber(cin, a, 0, 1);
 			obj.tableLines(cout);
 			obj.table(cout);
 			obj.tableGraphic(cout);
-			switch (a)
-			{
-			case 1:
-				tree.show(0);
-				break;
-			case 2:
-				tree.show(1);
-				break;
-			}
+			tree.show(a);
 			obj.tableLines(cout);
 			break;
 			
@@ -179,10 +171,33 @@ bool Interface<T>::action()
 		}
 		case 8:
 		{
-			/*T obj;
-			cin >> dynamic_cast<Staff&> (obj);
-			break;*/
-			//добавить редактирование объектов
+			rewind(stdin);
+			T obj;
+			string str;
+			cout << "Введите имя:";
+			std::getline(cin, str);
+			obj.setFirstName(str);
+			rewind(stdin);
+			cout << "Введите фамилию:";
+			std::getline(cin, str);
+			obj.setSurname(str);
+			rewind(stdin);
+			cout << "Введите отчество:";
+			std::getline(cin, str);
+			obj.setFatherName(str);
+			Node<T>* objPtr = tree.search(obj);
+			if (!objPtr)
+			{
+				cout << "Данного объекта не существует" << endl;
+				break;
+			}
+			cout << "Выберите параметр для редактирования:" << endl;
+			obj.chooseParameters();
+			int parameter;
+			cin >> parameter;
+			objPtr->data.edit(parameter);
+			break;
+		
 		}
 		case 9:
 			return 1;
@@ -201,12 +216,13 @@ void Interface<T>::searchMenu(T& obj, Functor & f)
 	int n, i;
 	do
 	{
+		cout << "Выберите параметры для поиска:" << endl;
 		obj.chooseParameters();
 		cin >> n;
 		std::string strForSet = obj.getParameter(n);
 		func.getSetFields().insert(strForSet);
 		cout << "Выбрать ещё один параметр:" << endl << "1-Да" << endl << "0-Нет" << endl;
-		cin >> i;
+		inputNumber(cin, i, 0, 1);
 	} while (i);
 	f = func;
 }

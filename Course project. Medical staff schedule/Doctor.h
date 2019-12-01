@@ -25,8 +25,10 @@ public:
 	virtual void chooseParameters() override;
 	virtual string getParameter(int n) override;
 
+	virtual void edit(int n) override;
+
 	bool operator ==(Doctor&obj);
-	bool operator !=(Doctor&obj);
+	//bool operator !=(Doctor&obj);
 
 	string getCategory();
 	void setCategory(string category_);

@@ -25,10 +25,10 @@ bool Doctor::operator==(Doctor & obj)
 		&& obj.speciality==speciality);
 }
 
-bool Doctor::operator!=(Doctor & obj)
-{
-	return (!(*this == obj));
-}
+//bool Doctor::operator!=(Doctor & obj)
+//{
+//	return (!(*this == obj));
+//}
 
 string Doctor::getCategory()
 {
@@ -72,7 +72,7 @@ void Doctor::chooseParameters()
 {
 	MedicalStaff::chooseParameters();
 	cout << "7-Категория" << endl;
-	cout << "8-Специализация" << endl;
+	cout << "8-Специальность" << endl;
 }
 
 string Doctor::getParameter(int n)
@@ -91,7 +91,7 @@ string Doctor::getParameter(int n)
 				inputLettersAndNumbers(cin, category);
 				return "category";
 			case 8:
-				std::cout << "Специализация" << endl;
+				std::cout << "Специальность:" << endl;
 				inputLetters(cin, speciality);
 				return "speciality";
 			default:
@@ -100,4 +100,20 @@ string Doctor::getParameter(int n)
 		}
 	} while (i);
 	return parameter;
+}
+
+void Doctor::edit(int n)
+{
+	MedicalStaff::edit(n);
+	switch (n)
+	{
+	case 7:
+		std::cout << "Категория:";
+		inputLettersAndNumbers(cin, category);
+		break;
+	case 8:
+		std::cout << "Специальность:" << endl;
+		inputLetters(cin, speciality);
+		break;
+	}
 }

@@ -21,15 +21,19 @@ int main()
 	list<graphic> l;
 	l.push_back(gr1);
 	l.push_back(gr2);
-	ServiceStaff d(str1, str1, str1, str1, str1, l, l);
+	Doctor d(str1, str1, str1, str1, str1,str1, l, l);
 	d.tableLines(cout);
 	d.table(cout);
 	d.tableGraphic(cout);
-	ServiceStaff d1(str2, str2, str2, str1, str1, l, l);
-	Tree<ServiceStaff> tree;
+	Doctor d1(str2, str2, str2, str1, str1,str1 ,l, l);
+	Tree<Doctor> tree;
 	tree.push(d);
 	tree.push(d1);
-	tree.show(0);*/
+	tree.show(0);
+	cout << endl;
 
+	d.editGraphic("Среда", 1);
+	
+	tree.show(1);*/
 }
 
