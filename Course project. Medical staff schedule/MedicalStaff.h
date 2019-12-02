@@ -15,6 +15,8 @@ public:
 
 	friend std::istream& operator >> (std::istream& in, MedicalStaff& obj);
 	friend std::ostream& operator << (std::ostream& out, const MedicalStaff& obj);
+	friend std::ifstream& operator >>(std::ifstream& in, MedicalStaff& obj);
+	friend std::ofstream& operator << (std::ofstream& out, MedicalStaff& obj);
 
 	virtual void table(std::ostream & out) override;
 	virtual void tableLines(std::ostream& out) const override;

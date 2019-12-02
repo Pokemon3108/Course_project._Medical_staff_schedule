@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 
+
 using std::cout;
 using std::endl;
 
@@ -28,7 +29,7 @@ public:
 	private:
 		Node<T>* ptr;
 	public:
-		Iterator() = default;
+		Iterator() : ptr(nullptr) {};
 
 		T& operator*();
 
@@ -70,7 +71,9 @@ public:
 
 	Node<T> * search(T & obj) const;
 
-	//void showInOrder(Node<T>* root, int a=0) const;
+	void writeToFile(Node<T>* root, std::ofstream& out);
+	void readFromFile(std::ifstream& in);
+
 	void show(bool flag);
 
 	void pop(T obj);
@@ -84,6 +87,8 @@ public:
 
 	Iterator begin();
 	Iterator end();
+
+	
 };
 
 template<typename T>
@@ -130,17 +135,29 @@ Node<T>* Tree<T>::search(T & obj) const
 	return temp;
 }
 
-//template <typename T>
-//void Tree<T>::showInOrder(Node<T>* root, int a) const
-//{
-//	/*if (!root) return;
-//	showInOrder(root->left);
-//	std::cout << root->data;
-//	if (a==1) 
-//	showInOrder(root->right);*/
-//
-//
-//}
+template <typename T>
+void Tree<T>::writeToFile(Node<T>* root, std::ofstream& out)
+{
+	if (!root) return;
+	(root->data).writeToFile(out);
+	writeToFile(root->left,out);
+	writeToFile(root->right,out);
+}
+
+template<typename T>
+void Tree<T>::readFromFile(std::ifstream & in)
+{
+	T obj;
+	while (in.peek() == '\n')
+		in.get();
+	while (!in.eof())
+	{
+		in >> obj;
+		push(obj);
+		in.get();
+	}
+}
+
 
 template<typename T>
 void Tree<T>::show(bool flag)
@@ -204,6 +221,7 @@ void Tree<T>::mostLeftItem(Node<T> * &nodeptr, T& value)
 		value = nodeptr->data;
 		Node<T>* delptr = nodeptr;
 		nodeptr = nodeptr->right;
+		if (nodeptr) nodeptr->parent = delptr->parent;
 		delete delptr;
 	}
 	else mostLeftItem(nodeptr->left, value);
@@ -231,7 +249,10 @@ Node<T>*& Tree<T>::getRoot()
 template<typename T>
 typename Tree<T>::Iterator Tree<T>::begin()
 {
+	
 	Iterator it;
+	if (!root) return it;
+	
 	Node<T>*curr = root;
 	
 	while (curr->left)
@@ -245,6 +266,7 @@ template<typename T>
 typename Tree<T>::Iterator Tree<T>::end()
 {
 	Iterator it;
+	if (!root) return it;
 	Node<T>*curr = root;
 
 	while (curr)

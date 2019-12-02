@@ -17,9 +17,13 @@ public:
 
 	friend std::istream& operator >> (std::istream& in, Nurse& obj);
 	friend std::ostream& operator << (std::ostream& out, const Nurse& obj);
+	friend std::ifstream& operator >>(std::ifstream& in, Nurse& obj);
+	friend std::ofstream& operator << (std::ofstream& out, Nurse& obj);
 
 	virtual void table(std::ostream & out) override;
 	virtual void tableLines(std::ostream& out) const;
+
+	void writeToFile(std::ofstream& out);
 
 	virtual void chooseParameters() override;
 	virtual string getParameter(int n) override;

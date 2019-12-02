@@ -9,6 +9,7 @@ int main()
 	SetConsoleOutputCP(1251);
 	Interface<int> obj;
 	obj.menu();
+
 	/*string str2 = "ывыв";
 	string str1 = "фы";
 	graphic gr1, gr2;

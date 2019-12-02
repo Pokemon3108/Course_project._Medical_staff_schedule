@@ -20,6 +20,7 @@ public:
 void inputLetters(std::istream& in, string& str) throw (InputError&);
 void inputLettersAndNumbers(std::istream& in, string& str) throw (InputError&);
 void inputWeekDay(std::istream& in, string& str) throw (InputError&);
+void inputYesNo(std::istream& in, string& str) throw (InputError&);
 
 
 template<typename T>
@@ -48,7 +49,3 @@ void inputNumber(std::istream& in, T&n, T range1, T range2)
 		}
 	} while (!flag);
 }
-
-
-
-

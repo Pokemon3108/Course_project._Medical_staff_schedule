@@ -17,6 +17,22 @@ std::ostream & operator<<(std::ostream & out, const ServiceStaff & obj)
 	return out;
 }
 
+std::ifstream & operator>>(std::ifstream & in, ServiceStaff & obj)
+{
+	in >> dynamic_cast<TechnicalStaff&>(obj);
+	std::getline(in, obj.workPlace, '\n');
+	in.close();
+	return in;
+}
+
+std::ofstream & operator<<(std::ofstream & out, ServiceStaff & obj)
+{
+	out << dynamic_cast<TechnicalStaff&>(obj);
+	out << obj.workPlace << '\n';
+	out.close();
+	return out;
+}
+
 void ServiceStaff::table(std::ostream & out)
 {
 	TechnicalStaff::table(out);
@@ -30,6 +46,11 @@ void ServiceStaff::tableLines(std::ostream & out) const
 	out << str1 << '+';
 	ServiceStaff obj;
 	obj.graphicLines(out);
+}
+
+void ServiceStaff::writeToFile(std::ofstream & out)
+{
+	out << (*this);
 }
 
 void ServiceStaff::edit(int n)

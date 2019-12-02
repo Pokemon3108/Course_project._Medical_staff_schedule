@@ -18,12 +18,16 @@ public:
 
 	friend std::istream& operator >> (std::istream& in, AdministrativeStaff& obj);
 	friend std::ostream& operator << (std::ostream& out, const AdministrativeStaff& obj);
+	friend std::ifstream& operator >>(std::ifstream& in, AdministrativeStaff& obj);
+	friend std::ofstream& operator << (std::ofstream& out, AdministrativeStaff& obj);
 	
 	virtual void chooseParameters() override;
 	virtual string getParameter(int n) override;
 
 	virtual void table(std::ostream & out) override;
 	virtual void tableLines(std::ostream& out) const override;
+
+	void writeToFile(std::ofstream& out);
 
 	virtual void edit(int n) override;
 
@@ -33,4 +37,3 @@ public:
 	string getRoomNumber();
 	void setRoomNumber(string room);
 };
-

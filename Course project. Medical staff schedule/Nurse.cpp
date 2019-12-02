@@ -18,6 +18,22 @@ std::ostream & operator<<(std::ostream & out, const Nurse & obj)
 	return out;
 }
 
+std::ifstream & operator>>(std::ifstream & in, Nurse & obj)
+{
+	in >> dynamic_cast<MedicalStaff&>(obj);
+	std::getline(in, obj.workprofile, '\n');
+	in.close();
+	return in;
+}
+
+std::ofstream & operator<<(std::ofstream & out, Nurse & obj)
+{
+	out << dynamic_cast<MedicalStaff&>(obj);
+	out << obj.workprofile << '\n';
+	out.close();
+	return out;
+}
+
 bool Nurse::operator==(Nurse & obj)
 {
 	return (dynamic_cast<MedicalStaff&>(obj) == *(dynamic_cast<MedicalStaff*>(this))
@@ -53,6 +69,11 @@ void Nurse::tableLines(std::ostream & out) const
 	out << str << '+';
 	Nurse obj;
 	obj.graphicLines(out);
+}
+
+void Nurse::writeToFile(std::ofstream & out)
+{
+	out << (*this);
 }
 
 void Nurse::chooseParameters()

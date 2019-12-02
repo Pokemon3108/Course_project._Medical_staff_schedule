@@ -2,9 +2,10 @@
 #include "Staff.h"
 #include "InputError.h"
 #include <algorithm>
+#include <fstream>
 
 std::istream & operator>>(std::istream & in, Staff & obj)
-{
+{	
 	cout << "Имя: ";
 	inputLetters(in, obj.firstName);
 	cout << "Фамилия: ";
@@ -24,6 +25,50 @@ std::ostream & operator<<(std::ostream & out, const Staff & obj)
 	using namespace std;
 	out << setiosflags(ios::left) << '|'<<setw(14) << obj.firstName <<'|'<< setw(19)  << obj.surname <<'|'<< setw(19) 
 		<< obj.fatherName<<'|';
+	return out;
+}
+
+std::ifstream & operator>>(std::ifstream & in, Staff & obj)
+{
+	std::getline(in, obj.firstName, '\n');
+	std::getline(in, obj.surname, '\n');
+	std::getline(in, obj.fatherName, '\n');
+	int size;
+	in >> size;
+	graphic gr;
+	for (; size; --size)
+	{
+		in >> gr.hour1 >> gr.hour2;
+		in.get();
+		std::getline(in, gr.weekday, '\n');
+		obj.work_graphic.push_back(gr);
+	}
+	in >> size;
+	for (; size; --size)
+	{
+		in >> gr.hour1 >> gr.hour2;
+		in.get();
+		std::getline(in, gr.weekday, '\n');
+		obj.duty_graphic.push_back(gr);
+	}
+
+	return in;
+}
+
+std::ofstream & operator<<(std::ofstream & out, Staff & obj)
+{
+	out << obj.firstName << '\n' << obj.surname << '\n' << obj.fatherName << '\n';
+	list<graphic>::iterator it;
+	int size = obj.work_graphic.size();
+	out << size << '\n';
+	for (it = obj.work_graphic.begin(); it != obj.work_graphic.end(); ++it)
+		out << it->hour1 << '\n' << it->hour2 << '\n' << it->weekday << '\n';
+	
+	size = obj.duty_graphic.size();
+	out << size << '\n';
+	for (it = obj.duty_graphic.begin(); it != obj.duty_graphic.end(); ++it)
+		out << it->hour1<<'\n'<< it->hour2<<'\n' << it->weekday << '\n';
+	
 	return out;
 }
 

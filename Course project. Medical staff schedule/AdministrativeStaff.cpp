@@ -18,6 +18,22 @@ std::ostream & operator<<(std::ostream & out, const AdministrativeStaff & obj)
 	return out;
 }
 
+std::ifstream & operator>>(std::ifstream & in, AdministrativeStaff & obj)
+{
+	in >> dynamic_cast<TechnicalStaff&>(obj);
+	std::getline(in, obj.roomNumber, '\n');
+	in.close();
+	return in;
+}
+
+std::ofstream & operator<<(std::ofstream & out, AdministrativeStaff & obj)
+{
+	out << dynamic_cast<TechnicalStaff&>(obj);
+	out << obj.roomNumber << '\n';
+	out.close();
+	return out;
+}
+
 bool AdministrativeStaff::operator==(AdministrativeStaff & obj)
 {
 	return (dynamic_cast<TechnicalStaff&>(obj) == *(dynamic_cast<TechnicalStaff*>(this)) 
@@ -81,6 +97,11 @@ void AdministrativeStaff::tableLines(std::ostream & out) const
 	out << str1 << '+';
 	AdministrativeStaff obj;
 	obj.graphicLines(out);
+}
+
+void AdministrativeStaff::writeToFile(std::ofstream & out)
+{
+	out << (*this);
 }
 
 void AdministrativeStaff::edit(int n)

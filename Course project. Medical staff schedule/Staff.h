@@ -29,6 +29,8 @@ public:
 
 	friend std::istream& operator >> (std::istream& in, Staff& obj);
 	friend std::ostream& operator << (std::ostream& out, const Staff& obj);
+	friend std::ifstream& operator >>(std::ifstream& in, Staff& obj);
+	friend std::ofstream& operator << (std::ofstream& out, Staff& obj);
 
 	void inputGraphic(std::istream& in, list<graphic>& list_graphic);
 	virtual void table(std::ostream & out);

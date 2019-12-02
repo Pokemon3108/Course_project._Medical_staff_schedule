@@ -23,6 +23,8 @@ public:
 
 	friend std::istream& operator >> (std::istream& in, TechnicalStaff& obj);
 	friend std::ostream& operator << (std::ostream& out, const TechnicalStaff& obj);
+	friend std::ifstream& operator >>(std::ifstream& in, TechnicalStaff& obj);
+	friend std::ofstream& operator << (std::ofstream& out, TechnicalStaff& obj);
 
 	virtual void edit(int n) override;
 

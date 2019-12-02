@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <set>
 #include <list>
+#include <fstream>
 
 using std::endl;
 using std::list;

@@ -5,8 +5,6 @@
 
 using std::endl;
 
-
-
 void inputLetters(std::istream& in, string & str) throw(InputError &)
 {
 	bool flag;
@@ -85,7 +83,7 @@ void inputWeekDay(std::istream & in, string & str) throw(InputError &)
 			{
 				if (str == vect[i]) return;
 			}
-			throw InputError(6, "Вы ввели не день неделию. Проверьте, возможно день недели был введён с маленькой буквы");
+			throw InputError(6, "Вы ввели не день недели. Проверьте, возможно день недели был введён с маленькой буквы");
 		}
 		catch (InputError& exception)
 		{
@@ -96,4 +94,26 @@ void inputWeekDay(std::istream & in, string & str) throw(InputError &)
 
 	} while (!flag);
 	
+}
+
+void inputYesNo(std::istream & in, string & str) throw(InputError &)
+{
+	bool flag;
+	do
+	{
+
+		try
+		{
+			flag = 1;
+			inputLetters(in, str);
+			if (str != "Да" && str != "да" && str != "нет" && str!="Нет")
+				throw InputError(7, "Необходимо ввести Да/Нет");
+		}
+		catch (InputError& exception)
+		{
+			flag = 0;
+			cerr << "Код:" << exception.getCode() << endl << "Описание:" << exception.what() << endl;
+			str.clear();
+		}
+	} while (!flag);
 }

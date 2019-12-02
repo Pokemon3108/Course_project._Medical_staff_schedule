@@ -47,6 +47,20 @@ std::ostream & operator<<(std::ostream & out, const TechnicalStaff & obj)
 	return out;
 }
 
+std::ifstream & operator>>(std::ifstream & in, TechnicalStaff & obj)
+{
+	in >> dynamic_cast<Staff&>(obj);
+	std::getline(in, obj.profession, '\n');
+	return in;
+}
+
+std::ofstream & operator<<(std::ofstream & out, TechnicalStaff & obj)
+{
+	out << dynamic_cast<Staff&>(obj);
+	out << obj.profession << '\n';
+	return out;
+}
+
 void TechnicalStaff::chooseParameters()
 {
 	Staff::chooseParameters();

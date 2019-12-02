@@ -39,6 +39,20 @@ std::ostream & operator<<(std::ostream & out, const MedicalStaff & obj)
 	
 }
 
+std::ifstream & operator>>(std::ifstream & in, MedicalStaff & obj)
+{
+	in >> dynamic_cast<Staff&>(obj);
+	std::getline(in, obj.department, '\n');
+	return in;
+}
+
+std::ofstream & operator<<(std::ofstream & out, MedicalStaff & obj)
+{
+	out << dynamic_cast<Staff&>(obj);
+	out << obj.department << '\n';
+	return out;
+}
+
 void MedicalStaff::table(std::ostream & out)
 {
 	Staff::table(out);
