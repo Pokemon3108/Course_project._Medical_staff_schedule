@@ -7,6 +7,7 @@
 #include "Functor.h"
 #include "Tree.h"
 #include "Algorithm.h"
+#include "Cancel.h"
 
 template <typename T>
 class Interface
@@ -80,6 +81,7 @@ void Interface<T>::menu()
 template<typename T>
 bool Interface<T>::action(const char* filename)
 {
+	stack <Cancel<T, T&>> st;
 	Tree<T> tree;
 	std::ifstream in(filename);
 	tree.readFromFile(in);
@@ -94,8 +96,10 @@ bool Interface<T>::action(const char* filename)
 		cout << "6-Найти объекты по всем параметрам" << endl;
 		cout << "7-Количество объектов" << endl;
 		cout << "8-Отредактировать объект" << endl;
-		cout << "9-Осуществить операции с объектами других классов" << endl;
+		cout << "9-Отменить последнее действие" << endl;
+		cout << "10-Осуществить операции с объектами других классов" << endl;
 		cout << "0-Конец программы" << endl;
+
 		inputNumber(cin, n, 0, 9);
 
 
@@ -104,10 +108,15 @@ bool Interface<T>::action(const char* filename)
 
 		case 1:
 		{
+			//сравнивать размеры дерева
+			int size1 = size(tree.begin(), tree.end());
 			T obj;
 			cout << "\nВведите объект" << endl;
 			cin >> obj;
 			tree.push(obj);
+			int size2 = size(tree.begin(), tree.end());
+			if (size2 > size1)
+				st.push(Cancel<T,T&>("push", obj, obj));
 			break;
 		}
 
@@ -128,15 +137,22 @@ bool Interface<T>::action(const char* filename)
 
 		case 3:
 		{
+			int size1 = size(tree.begin(), tree.end());
 			T obj;
 			cout << "\nВведите объект" << endl;
-			cin >> obj;
-			tree.pop(obj);
+			obj.inputFullName(); //ввели полное имя
+			Node<T>* temp = tree.search(obj); //нашли объект с таким именем
+			obj = temp->data; //записали его в объект
+			tree.pop(obj); //удалили его
+			int size2 = size(tree.begin(), tree.end());
+			if (size2 < size1)
+				st.push(Cancel<T, T&>("pop", obj, obj));
 			break;
 		}
 
 		case 4:
 			tree.destroyTree(tree.getRoot());
+			while (!st.empty()) st.pop();
 			break;
 
 		case 5:
@@ -181,6 +197,7 @@ bool Interface<T>::action(const char* filename)
 			Node<T>* temp = tree.search(obj);
 			if (!temp) cout << "Такого элемента не существует";
 			else cout << "Элемент был найден";
+			break;
 		}
 		case 7:
 		{
@@ -193,19 +210,9 @@ bool Interface<T>::action(const char* filename)
 		{
 			rewind(stdin);
 			T obj;
-			string str;
-			cout << "Введите имя:";
-			std::getline(cin, str);
-			obj.setFirstName(str);
-			rewind(stdin);
-			cout << "Введите фамилию:";
-			std::getline(cin, str);
-			obj.setSurname(str);
-			rewind(stdin);
-			cout << "Введите отчество:";
-			std::getline(cin, str);
-			obj.setFatherName(str);
+			obj.inputFullName();
 			Node<T>* objPtr = tree.search(obj);
+			obj = objPtr->data; //в obj хранится значение до редактирования
 			if (!objPtr)
 			{
 				cout << "Данного объекта не существует" << endl;
@@ -216,10 +223,22 @@ bool Interface<T>::action(const char* filename)
 			int parameter;
 			inputNumber(cin, parameter, 0, 8);
 			objPtr->data.edit(parameter);
+			st.push(Cancel<T, T&>("edit", obj, objPtr->data)); //заносим в стек объекты до редактирования и после
 			break;
 
 		}
 		case 9:
+		{
+			if (st.size())
+			{
+				Cancel<T, T&> action(st.top());
+				action.cancelAction(tree);
+				st.pop();
+			}
+			else cout << "Последние действия отменить нельзя\n";
+			break;
+		}
+		case 10:
 		case 0:
 		{
 			string str;
@@ -233,7 +252,7 @@ bool Interface<T>::action(const char* filename)
 			}
 			else return n;
 		}
-
+		
 		}
 	} while (n);
 	return 0;
@@ -244,15 +263,17 @@ template<typename T>
 void Interface<T>::searchMenu(T& obj, Functor & f)
 {
 	Functor func = f;
-	int n, i;
+	int i;
 	do
 	{
 		int parameter;
 		cout << "Выберите параметры для поиска:" << endl;
 		obj.chooseParameters();
 		inputNumber(cin, parameter, 0, 8);
+		
 		std::string strForSet = obj.getParameter(parameter);
 		func.getSetFields().insert(strForSet);
+		
 		cout << "Выбрать ещё один параметр:" << endl << "1-Да" << endl << "0-Нет" << endl;
 		inputNumber(cin, i, 0, 1);
 	} while (i);

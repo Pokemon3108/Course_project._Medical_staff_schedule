@@ -1,10 +1,6 @@
 #pragma once
 #include "pch.h"
 
-
-using std::cout;
-using std::endl;
-
 template <typename T>
 struct Node
 {
@@ -154,7 +150,7 @@ void Tree<T>::readFromFile(std::ifstream & in)
 	{
 		in >> obj;
 		push(obj);
-		char c=in.get();
+		in.get();
 	}
 }
 

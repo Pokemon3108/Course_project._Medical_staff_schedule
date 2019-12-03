@@ -280,6 +280,19 @@ void Staff::editGraphic(string day, int listType)
 	else  duty_graphic=l;
 }
 
+void Staff::inputFullName()
+{
+	rewind(stdin);
+	cout << "¬ведите им€:";
+	std::getline(cin, firstName);
+	rewind(stdin);
+	cout << "¬ведите фамилию:";
+	std::getline(cin, surname);
+	rewind(stdin);
+	cout << "¬ведите отчество:";
+	std::getline(cin, fatherName);
+}
+
 
 bool Staff::operator!=(Staff & obj)
 {

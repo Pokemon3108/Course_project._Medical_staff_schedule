@@ -46,6 +46,7 @@ public:
 	virtual void edit(int n);
 	void editGraphic(string day, int listType);
 	
+	void inputFullName();
 
 	bool operator !=(Staff& obj);
 	bool operator >(Staff& obj);

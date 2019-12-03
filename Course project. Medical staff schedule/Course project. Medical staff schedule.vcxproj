@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="AdministrativeStaff.h" />
     <ClInclude Include="Algorithm.h" />
+    <ClInclude Include="Cancel.h" />
     <ClInclude Include="Doctor.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Functor.h" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AdministrativeStaff.cpp" />
+    <ClCompile Include="Cancel.cpp" />
     <ClCompile Include="Course project. Medical staff schedule.cpp" />
     <ClCompile Include="Doctor.cpp" />
     <ClCompile Include="Exception.cpp" />

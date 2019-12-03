@@ -5,7 +5,7 @@
 
 using std::endl;
 
-void inputLetters(std::istream& in, string & str) throw(InputError &)
+void inputLetters(std::istream& in, string & str)
 {
 	bool flag;
 	do
@@ -40,7 +40,7 @@ int InputError::getCode()
 }
 
 
-void inputLettersAndNumbers(std::istream& in, string & str) throw(InputError &)
+void inputLettersAndNumbers(std::istream& in, string & str)
 {
 	bool flag;
 	do
@@ -69,7 +69,7 @@ void inputLettersAndNumbers(std::istream& in, string & str) throw(InputError &)
 	} while (!flag);
 }
 
-void inputWeekDay(std::istream & in, string & str) throw(InputError &)
+void inputWeekDay(std::istream & in, string & str)
 {
 	bool flag;
 	do
@@ -96,7 +96,7 @@ void inputWeekDay(std::istream & in, string & str) throw(InputError &)
 	
 }
 
-void inputYesNo(std::istream & in, string & str) throw(InputError &)
+void inputYesNo(std::istream & in, string & str)
 {
 	bool flag;
 	do

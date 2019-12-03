@@ -17,10 +17,10 @@ public:
 };
 
 
-void inputLetters(std::istream& in, string& str) throw (InputError&);
-void inputLettersAndNumbers(std::istream& in, string& str) throw (InputError&);
-void inputWeekDay(std::istream& in, string& str) throw (InputError&);
-void inputYesNo(std::istream& in, string& str) throw (InputError&);
+void inputLetters(std::istream& in, string& str);
+void inputLettersAndNumbers(std::istream& in, string& str);
+void inputWeekDay(std::istream& in, string& str);
+void inputYesNo(std::istream& in, string& str);
 
 
 template<typename T>

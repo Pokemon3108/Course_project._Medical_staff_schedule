@@ -6,6 +6,7 @@
 #include <set>
 #include <list>
 #include <fstream>
+#include <stack>
 
 using std::endl;
 using std::list;
@@ -15,4 +16,5 @@ using std::cout;
 using std::cin;
 using std::setw;
 using std::cerr;
+using std::stack;
 #endif 
