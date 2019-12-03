@@ -22,7 +22,7 @@ std::ifstream & operator>>(std::ifstream & in, AdministrativeStaff & obj)
 {
 	in >> dynamic_cast<TechnicalStaff&>(obj);
 	std::getline(in, obj.roomNumber, '\n');
-	in.close();
+	//in.close();
 	return in;
 }
 
@@ -30,7 +30,7 @@ std::ofstream & operator<<(std::ofstream & out, AdministrativeStaff & obj)
 {
 	out << dynamic_cast<TechnicalStaff&>(obj);
 	out << obj.roomNumber << '\n';
-	out.close();
+	//out.close();
 	return out;
 }
 

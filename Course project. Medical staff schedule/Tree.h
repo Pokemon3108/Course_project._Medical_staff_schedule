@@ -154,7 +154,7 @@ void Tree<T>::readFromFile(std::ifstream & in)
 	{
 		in >> obj;
 		push(obj);
-		in.get();
+		char c=in.get();
 	}
 }
 

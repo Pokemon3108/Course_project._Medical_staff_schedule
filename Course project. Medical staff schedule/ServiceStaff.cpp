@@ -13,7 +13,7 @@ std::ostream & operator<<(std::ostream & out, const ServiceStaff & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const TechnicalStaff&>(obj);
-	out << setiosflags(ios::left) << setw(19) << obj.workPlace<<'|';
+	out << setiosflags(ios::left) << setw(24) << obj.workPlace<<'|';
 	return out;
 }
 
@@ -21,7 +21,7 @@ std::ifstream & operator>>(std::ifstream & in, ServiceStaff & obj)
 {
 	in >> dynamic_cast<TechnicalStaff&>(obj);
 	std::getline(in, obj.workPlace, '\n');
-	in.close();
+	//in.close();
 	return in;
 }
 
@@ -29,20 +29,20 @@ std::ofstream & operator<<(std::ofstream & out, ServiceStaff & obj)
 {
 	out << dynamic_cast<TechnicalStaff&>(obj);
 	out << obj.workPlace << '\n';
-	out.close();
+	//out.close();
 	return out;
 }
 
 void ServiceStaff::table(std::ostream & out)
 {
 	TechnicalStaff::table(out);
-	out << std::setiosflags(std::ios::left) << setw(20) << "|Рабочая область";
+	out << std::setiosflags(std::ios::left) << setw(25) << "|Рабочая область";
 }
 
 void ServiceStaff::tableLines(std::ostream & out) const
 {
 	TechnicalStaff::tableLines(out);
-	string str1(19, '-');
+	string str1(24, '-');
 	out << str1 << '+';
 	ServiceStaff obj;
 	obj.graphicLines(out);

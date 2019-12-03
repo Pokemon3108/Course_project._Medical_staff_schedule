@@ -23,7 +23,8 @@ std::ifstream & operator>>(std::ifstream & in, Doctor & obj)
 {
 	in >> dynamic_cast<MedicalStaff&>(obj);
 	std::getline(in, obj.category, '\n');
-	in.close();
+	std::getline(in, obj.speciality, '\n');
+	//in.close();
 	return in;
 }
 
@@ -31,7 +32,7 @@ std::ofstream & operator<<(std::ofstream & out, Doctor & obj)
 {
 	out << dynamic_cast<MedicalStaff&>(obj);
 	out << obj.category << '\n' << obj.speciality << '\n';
-	out.close();
+	//out.close();
 	return out;
 
 }

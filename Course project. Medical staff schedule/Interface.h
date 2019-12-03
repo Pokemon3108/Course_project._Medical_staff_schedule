@@ -224,20 +224,19 @@ bool Interface<T>::action(const char* filename)
 		{
 			string str;
 			std::cout << "Сохранить изменения?"<<endl;
-			
 			inputYesNo(cin, str);
-			if (str == "Да")
+			if (str == "да" || str=="Да")
 			{
 				std::ofstream out(filename);
+				//out.close();
 				tree.writeToFile(tree.getRoot(), out);
-				//добавить чистку всего файла
 			}
 			else return n;
 		}
 
 		}
 	} while (n);
-	//return 0;
+	return 0;
 }
 
 
