@@ -16,11 +16,6 @@ bool TechnicalStaff::operator==(TechnicalStaff & obj)
 	return (dynamic_cast<Staff&>(obj) == *(dynamic_cast<Staff*>(this)) && obj.profession==profession);
 }
 
-//bool TechnicalStaff::operator!=(TechnicalStaff & obj)
-//{
-//	return (!(*this == obj));
-//}
-
 string TechnicalStaff::getProfession()
 {
 	return profession;

@@ -3,7 +3,7 @@
   <Class Name="Staff">
     <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ARAQAAAEAABAAARAAESUAQkAACAAAAAAAAAgCERAFAA=</HashCode>
+      <HashCode>MRIYAAgEAABAAgRAAESUAQkAACCAAAAAAEAgikRAFAA=</HashCode>
       <FileName>Staff.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -22,55 +22,90 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MedicalStaff">
-    <Position X="1.75" Y="7.25" Width="1.5" />
+    <Position X="1.75" Y="9.25" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>EAAAAQAAAAAAAAAAAAAAAQAQAABAAAAAAAAAAAAAFAA=</HashCode>
+      <HashCode>EAAAAQAAAAAAAABAAAAAAQAQAABAAAAAAEAAAgAAFAA=</HashCode>
       <FileName>MedicalStaff.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TechnicalStaff">
-    <Position X="6.25" Y="7.25" Width="1.5" />
+    <Position X="6.25" Y="9.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAEAAAAAAACAAAAIAQAAAAAAAAAAAAAAAAAANAA=</HashCode>
+      <HashCode>gAAAAAEAAAAAAADAAAAIAQAAAAAAAAAAAEAAAgAANAA=</HashCode>
       <FileName>TechnicalStaff.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Doctor">
-    <Position X="0.75" Y="10.75" Width="1.5" />
+    <Position X="0.75" Y="13.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAIAACAAAAQAAAAAAIAQAAIAIAAAAFAA=</HashCode>
+      <HashCode>AAIAAAAAAAAAAIBACAAAAQAAAAAAIAQAAMAIBgAAFAA=</HashCode>
       <FileName>Doctor.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Nurse">
-    <Position X="3" Y="10.75" Width="1.5" />
+    <Position X="3" Y="13.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAACAAAAAAQAAAIAAAiAAAAIAAAAAFAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAADAAAAAAQAAAIAAAiAAAEIABgAAFAA=</HashCode>
       <FileName>Nurse.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ServiceStaff">
-    <Position X="5.25" Y="11" Width="1.5" />
+    <Position X="5.25" Y="13.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAQACAAAAAAEAABgAAAAANAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAQACAAAAAAEAAFgABgAANAA=</HashCode>
       <FileName>ServiceStaff.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AdministrativeStaff">
-    <Position X="7.5" Y="11" Width="1.5" />
+    <Position X="7.5" Y="13.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAgAAAACQCBAAAAAAAAAAAAAAAAFAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAQABgAAAACQCBAAAAAAAAAEAABgAAFAA=</HashCode>
       <FileName>AdministrativeStaff.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="graphic" Collapsed="true">
-    <Position X="10" Y="0.5" Width="1.5" />
+  <Class Name="Cancel&lt;T&gt;">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAQAAAYAAAAAAAAAAAAAAQQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cancel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tree&lt;T&gt;">
+    <Position X="7" Y="2.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Tree&lt;T&gt;::Iterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Tree.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAACDAADAAAAAAAAgAIAYAAAAAAAAByAIRQAAAAA=</HashCode>
+      <FileName>Tree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Functor">
+    <Position X="9.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CBAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Functor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="graphic">
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAgAAAAAAAQAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Staff.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Node&lt;T&gt;">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAIAAAAAAAQAAAAgAA=</HashCode>
+      <FileName>Tree.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Font Name="Segoe UI" Size="9" />

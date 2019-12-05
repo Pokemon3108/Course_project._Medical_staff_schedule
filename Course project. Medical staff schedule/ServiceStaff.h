@@ -30,7 +30,6 @@ public:
 	virtual string getParameter(int n) override;
 
 	bool operator==(ServiceStaff& obj);
-	//bool operator!=(ServiceStaff& obj);
 
 	string getWorkPlace();
 	void setWorkPlace(string place);

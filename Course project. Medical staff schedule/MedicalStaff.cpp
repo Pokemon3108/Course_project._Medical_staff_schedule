@@ -7,11 +7,6 @@ bool MedicalStaff::operator==(MedicalStaff & obj)
 	return (dynamic_cast<Staff&>(obj) == *(dynamic_cast<Staff*>(this)) && obj.department == department);
 }
 
-//bool MedicalStaff::operator!=(MedicalStaff & obj)
-//{
-//	return (!(*this == obj));
-//}
-
 string MedicalStaff::getDepartment() const
 {
 	return department;

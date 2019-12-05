@@ -81,7 +81,7 @@ void Interface<T>::menu()
 template<typename T>
 bool Interface<T>::action(const char* filename)
 {
-	stack <Cancel<T, T&>> st;
+	stack <Cancel<T>> st;
 	Tree<T> tree;
 	std::ifstream in(filename);
 	tree.readFromFile(in);
@@ -100,7 +100,7 @@ bool Interface<T>::action(const char* filename)
 		cout << "10-Осуществить операции с объектами других классов" << endl;
 		cout << "0-Конец программы" << endl;
 
-		inputNumber(cin, n, 0, 9);
+		inputNumber(cin, n, 0, 10);
 
 
 		switch (n)
@@ -108,7 +108,6 @@ bool Interface<T>::action(const char* filename)
 
 		case 1:
 		{
-			//сравнивать размеры дерева
 			int size1 = size(tree.begin(), tree.end());
 			T obj;
 			cout << "\nВведите объект" << endl;
@@ -116,7 +115,7 @@ bool Interface<T>::action(const char* filename)
 			tree.push(obj);
 			int size2 = size(tree.begin(), tree.end());
 			if (size2 > size1)
-				st.push(Cancel<T,T&>("push", obj, obj));
+				st.push(Cancel<T>("push", obj));
 			break;
 		}
 
@@ -132,7 +131,6 @@ bool Interface<T>::action(const char* filename)
 			tree.show(a);
 			obj.tableLines(cout);
 			break;
-
 		}
 
 		case 3:
@@ -142,11 +140,15 @@ bool Interface<T>::action(const char* filename)
 			cout << "\nВведите объект" << endl;
 			obj.inputFullName(); //ввели полное имя
 			Node<T>* temp = tree.search(obj); //нашли объект с таким именем
-			obj = temp->data; //записали его в объект
-			tree.pop(obj); //удалили его
-			int size2 = size(tree.begin(), tree.end());
-			if (size2 < size1)
-				st.push(Cancel<T, T&>("pop", obj, obj));
+			if (temp)
+			{
+				obj = temp->data; //записали его в объект
+				tree.pop(obj); //удалили его
+				int size2 = size(tree.begin(), tree.end());
+				if (size2 < size1)
+					st.push(Cancel<T>("pop", obj));
+			}
+			else cout << "Работника с таким именем не существует" << endl;
 			break;
 		}
 
@@ -212,18 +214,18 @@ bool Interface<T>::action(const char* filename)
 			T obj;
 			obj.inputFullName();
 			Node<T>* objPtr = tree.search(obj);
-			obj = objPtr->data; //в obj хранится значение до редактирования
 			if (!objPtr)
 			{
-				cout << "Данного объекта не существует" << endl;
+				cout << "Работника с таким именем не существует" << endl;
 				break;
 			}
+			obj = objPtr->data; //в obj хранится значение до редактирования
 			cout << "Выберите параметр для редактирования:" << endl;
 			obj.chooseParameters();
 			int parameter;
 			inputNumber(cin, parameter, 0, 8);
 			objPtr->data.edit(parameter);
-			st.push(Cancel<T, T&>("edit", obj, objPtr->data)); //заносим в стек объекты до редактирования и после
+			st.push(Cancel<T>("edit", obj, objPtr->data)); //заносим в стек объекты до редактирования и после
 			break;
 
 		}
@@ -231,7 +233,7 @@ bool Interface<T>::action(const char* filename)
 		{
 			if (st.size())
 			{
-				Cancel<T, T&> action(st.top());
+				Cancel<T> action(st.top());
 				action.cancelAction(tree);
 				st.pop();
 			}

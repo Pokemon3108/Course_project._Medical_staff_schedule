@@ -32,8 +32,7 @@ public:
 	virtual void edit(int n) override;
 
 	bool operator ==(Doctor&obj);
-	//bool operator !=(Doctor&obj);
-
+	
 	string getCategory();
 	void setCategory(string category_);
 

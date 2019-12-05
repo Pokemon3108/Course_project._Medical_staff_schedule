@@ -22,7 +22,6 @@ std::ifstream & operator>>(std::ifstream & in, Nurse & obj)
 {
 	in >> dynamic_cast<MedicalStaff&>(obj);
 	std::getline(in, obj.workprofile, '\n');
-	//in.close();
 	return in;
 }
 
@@ -30,7 +29,6 @@ std::ofstream & operator<<(std::ofstream & out, Nurse & obj)
 {
 	out << dynamic_cast<MedicalStaff&>(obj);
 	out << obj.workprofile << '\n';
-	//out.close();
 	return out;
 }
 
@@ -39,11 +37,6 @@ bool Nurse::operator==(Nurse & obj)
 	return (dynamic_cast<MedicalStaff&>(obj) == *(dynamic_cast<MedicalStaff*>(this))
 		&& obj.workprofile == workprofile);
 }
-
-//bool Nurse::operator!=(Nurse & obj)
-//{
-//	return (!(*this == obj));
-//}
 
 void Nurse::setWorkProfile(string profile)
 {

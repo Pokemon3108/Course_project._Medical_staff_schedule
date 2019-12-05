@@ -63,7 +63,6 @@ public:
 
 	void push(T obj);
 	void insert(Node<T>* &root, T data, Node<T>* parent);
-	//Node<T> * search(const Node<T> & obj) const;
 
 	Node<T> * search(T & obj) const;
 
@@ -150,7 +149,7 @@ void Tree<T>::readFromFile(std::ifstream & in)
 	{
 		in >> obj;
 		push(obj);
-		in.get();
+		char c=in.peek();
 	}
 }
 

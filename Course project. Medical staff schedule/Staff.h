@@ -46,7 +46,8 @@ public:
 	virtual void edit(int n);
 	void editGraphic(string day, int listType);
 	
-	void inputFullName();
+	void inputFullName(std::istream& in=cin);
+	void inputHours(graphic& gr, std::istream& in = cin);
 
 	bool operator !=(Staff& obj);
 	bool operator >(Staff& obj);

@@ -27,7 +27,6 @@ public:
 	virtual void edit(int n) override;
 
 	bool operator ==(MedicalStaff& obj);
-	//bool operator !=(MedicalStaff& obj);
 
 	string getDepartment() const;
 	void setDepartment(string department);

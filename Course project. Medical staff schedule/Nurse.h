@@ -31,7 +31,6 @@ public:
 	virtual void edit(int n) override;
 
 	bool operator==(Nurse& obj);
-	//bool operator!=(Nurse& obj);
 
 	void setWorkProfile(string profile);
 	string getWorkProfile();

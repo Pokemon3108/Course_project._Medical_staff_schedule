@@ -6,12 +6,7 @@
 
 std::istream & operator>>(std::istream & in, Staff & obj)
 {	
-	cout << "Имя: ";
-	inputLetters(in, obj.firstName);
-	cout << "Фамилия: ";
-	inputLetters(in, obj.surname);
-	cout << "Отчество: ";
-	inputLetters(in, obj.fatherName);
+	obj.inputFullName(in);
 	cout << "График дежурств:" << endl;
 	obj.inputGraphic(in, obj.duty_graphic);
 	cout << "График работы:" << endl;
@@ -95,14 +90,10 @@ void Staff::inputGraphic(std::istream & in, list<graphic>& list_graphic)
 		if (it==list_graphic.end())
 		{
 			gr.weekday = day;
-			cout << "Первый час=";
-			inputNumber(in, gr.hour1, 0, 24);
-			cout << "Последний час=";
-			inputNumber(in, gr.hour2, gr.hour1, 24);
+			inputHours(gr, in);
 			list_graphic.push_back(gr);
 		}
 		
-
 	cout << "1-Ввести еще один день графика"<<endl<< "0-Закончить ввод графика"<<endl;
 	inputNumber(cin,i,0,1);
 
@@ -252,22 +243,24 @@ void Staff::edit(int n)
 
 void Staff::editGraphic(string day, int listType)
 {
-	cout << "1-Отредактировать день" << endl << "0-Удалить день" << endl;
+	cout << "1-Отредактировать день\n" <<"2-Добавить день\n"<< "0-Удалить день" << endl;
 	int operation;
-	inputNumber(cin, operation, 0, 1);
+	inputNumber(cin, operation, 0, 2);
 	
 	list<graphic> l;
 	if (listType) l = work_graphic;
 	else l = duty_graphic;
+
 	list<graphic>::iterator it;
 	for (it = l.begin(); it != l.end(); ++it)
 	{
 		if (operation && it->weekday == day)
 		{
-			cout << "Первый час=";
-			inputNumber(cin, it->hour1, 0, 24);
-			cout << "Последний час=";
-			inputNumber(cin, it->hour2, it->hour1, 24);
+			if (operation == 2) {
+				cout << "Данный день существует в графике дежурств. Для его изменения выполните операцию редактирования\n";
+				break;
+			}
+			inputHours(*it);
 			break;
 		}
 		else if (!operation && it->weekday == day)
@@ -276,21 +269,37 @@ void Staff::editGraphic(string day, int listType)
 			break;
 		}
 	}
+	if (operation == 1 && it == l.end()) cout << "Данного дня не существует в графике. Для изменений выполните операцию добавления\n";
+	if (operation == 2 && it == l.end())
+	{
+		graphic gr;
+		gr.weekday = day;
+		inputHours(gr);
+		l.push_back(gr);
+	}
 	if (listType) work_graphic=l;
 	else  duty_graphic=l;
 }
 
-void Staff::inputFullName()
+void Staff::inputFullName(std::istream& in)
 {
 	rewind(stdin);
 	cout << "Введите имя:";
-	std::getline(cin, firstName);
+	std::getline(in, firstName);
 	rewind(stdin);
 	cout << "Введите фамилию:";
-	std::getline(cin, surname);
+	std::getline(in, surname);
 	rewind(stdin);
 	cout << "Введите отчество:";
-	std::getline(cin, fatherName);
+	std::getline(in, fatherName);
+}
+
+void Staff::inputHours(graphic& gr, std::istream& in)
+{
+	cout << "Первый час=";
+	inputNumber(in, gr.hour1, 0, 24);
+	cout << "Последний час=";
+	inputNumber(in, gr.hour2, gr.hour1, 24);
 }
 
 
