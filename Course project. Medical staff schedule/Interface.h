@@ -22,7 +22,6 @@ public:
 	void menu();
 	bool action(const char* filename);
 	void searchMenu(T& obj, Functor& f);
-	//void chooseGraphicType();
 	friend class Functor;
 };
 
@@ -47,27 +46,27 @@ void Interface<T>::menu()
 		case 1:
 		{
 			Interface<Doctor> obj;
-			if (!obj.action("Doctor.txt")) return;
+			if (!obj.action("..\\files\\Doctor.txt")) return;
 		}
 		break;
 
 		case 2:
 		{
 			Interface<Nurse> obj;
-			if (!obj.action("Nurse.txt")) return;
+			if (!obj.action("..\\files\\Nurse.txt")) return;
 		}
 		break;
 
 		case 3:
 		{
 			Interface<AdministrativeStaff> obj;
-			if (!obj.action("AdministrativeStaff.txt")) return;
+			if (!obj.action("..\\files\\AdministrativeStaff.txt")) return;
 		}
 		break;
 		case 4:
 		{
 			Interface<ServiceStaff> obj;
-			if (!obj.action("ServiceStaff.txt")) return;
+			if (!obj.action("..\\files\\ServiceStaff.txt")) return;
 		}
 		break;
 		case 0:
@@ -92,15 +91,14 @@ bool Interface<T>::action(const char* filename)
 		cout << "2-Вывести информацию о всех объектах" << endl;
 		cout << "3-Удалить объект" << endl;
 		cout << "4-Удалить всё" << endl;
-		cout << "5-Найти объект по выбранным параметрам" << endl;
-		cout << "6-Найти объекты по всем параметрам" << endl;
-		cout << "7-Количество объектов" << endl;
-		cout << "8-Отредактировать объект" << endl;
-		cout << "9-Отменить последнее действие" << endl;
-		cout << "10-Осуществить операции с объектами других классов" << endl;
+		cout << "5-Найти объекты по выбранным параметрам" << endl;
+		cout << "6-Количество объектов" << endl;
+		cout << "7-Отредактировать объект" << endl;
+		cout << "8-Отменить последнее действие" << endl;
+		cout << "9-Осуществить операции с объектами других классов" << endl;
 		cout << "0-Конец программы" << endl;
 
-		inputNumber(cin, n, 0, 10);
+		inputNumber(cin, n, 0, 9);
 
 
 		switch (n)
@@ -153,9 +151,17 @@ bool Interface<T>::action(const char* filename)
 		}
 
 		case 4:
-			tree.destroyTree(tree.getRoot());
-			while (!st.empty()) st.pop();
+		{
+			cout << "Вы уверены, что хотите удалить всё? Отменить данное действие будет невозможно" << endl;
+			string str;
+			inputYesNo(cin, str);
+			if (str == "да" || str == "Да")
+			{
+				tree.destroyTree(tree.getRoot());
+				while (!st.empty()) st.pop();
+			}
 			break;
+		}
 
 		case 5:
 		{
@@ -193,24 +199,13 @@ bool Interface<T>::action(const char* filename)
 		}
 		case 6:
 		{
-			T obj;
-			cout << "\nВведите объект" << endl;
-			cin >> obj;
-			Node<T>* temp = tree.search(obj);
-			if (!temp) cout << "Такого элемента не существует";
-			else cout << "Элемент был найден";
-			break;
-		}
-		case 7:
-		{
 
 			int s = size(tree.begin(), tree.end());
 			std::cout << "Количество работников данной сферы=" << s << endl;
 			break;
 		}
-		case 8:
+		case 7:
 		{
-			rewind(stdin);
 			T obj;
 			obj.inputFullName();
 			Node<T>* objPtr = tree.search(obj);
@@ -229,7 +224,7 @@ bool Interface<T>::action(const char* filename)
 			break;
 
 		}
-		case 9:
+		case 8:
 		{
 			if (st.size())
 			{
@@ -240,7 +235,7 @@ bool Interface<T>::action(const char* filename)
 			else cout << "Последние действия отменить нельзя\n";
 			break;
 		}
-		case 10:
+		case 9:
 		case 0:
 		{
 			string str;
@@ -249,7 +244,6 @@ bool Interface<T>::action(const char* filename)
 			if (str == "да" || str=="Да")
 			{
 				std::ofstream out(filename);
-				//out.close();
 				tree.writeToFile(tree.getRoot(), out);
 			}
 			else return n;

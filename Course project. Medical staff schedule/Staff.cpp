@@ -75,8 +75,7 @@ void Staff::inputGraphic(std::istream & in, list<graphic>& list_graphic)
 	{
 		string day;
 		graphic gr;
-		cout << "День недели:";
-		inputWeekDay(in, day);
+		day = inputWeekDay(in);
 		list<graphic>::iterator it=list_graphic.begin();
 		while (it != list_graphic.end())
 		{
@@ -187,7 +186,7 @@ std::string Staff::getParameter(int n)
 	{
 		cout << "День недели в графике дежурств:";
 		graphic gr;
-		inputLetters(cin, gr.weekday);
+		gr.weekday = inputWeekDay();
 		duty_graphic.push_back(gr);
 		return "weekdayDuty";
 	}
@@ -195,7 +194,7 @@ std::string Staff::getParameter(int n)
 	{
 		cout << "День недели в графике работы:";
 		graphic gr;
-		inputLetters(cin, gr.weekday);
+		gr.weekday = inputWeekDay();
 		work_graphic.push_back(gr);
 		return "weekdayWork";
 	}
@@ -226,7 +225,7 @@ void Staff::edit(int n)
 	{
 		cout << "День недели в графике дежурств:";
 		string day;
-		inputLetters(cin, day);
+		day = inputWeekDay();
 		editGraphic(day, 0);
 		break;
 	}
@@ -234,7 +233,7 @@ void Staff::edit(int n)
 	{
 		cout << "День недели в графике работы:";
 		string day;
-		inputLetters(cin, day);
+		day = inputWeekDay();
 		editGraphic(day, 1);
 		break;
 	}
@@ -300,6 +299,17 @@ void Staff::inputHours(graphic& gr, std::istream& in)
 	inputNumber(in, gr.hour1, 0, 24);
 	cout << "Последний час=";
 	inputNumber(in, gr.hour2, gr.hour1, 24);
+}
+
+string Staff::inputWeekDay(std::istream & in)
+{
+	cout << "День недели:\n";
+	cout << "1-Понедельник\n" << "2-Вторник\n" << "3-Среда\n" << "4-Четверг\n" << "5-Пятница\n" << "6-Суббота\n"
+		<< "7-Воскресенье\n";
+	int n;
+	inputNumber(in, n, 1, 7);
+	std::vector<string> vect{ "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье" };
+	return vect[n - 1];
 }
 
 

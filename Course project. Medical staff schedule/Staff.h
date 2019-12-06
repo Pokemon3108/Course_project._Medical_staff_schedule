@@ -2,7 +2,7 @@
 #include <iostream>
 #include <list>
 #include "InputError.h"
-
+#include <vector>
 
 struct graphic
 {
@@ -48,6 +48,7 @@ public:
 	
 	void inputFullName(std::istream& in=cin);
 	void inputHours(graphic& gr, std::istream& in = cin);
+	string inputWeekDay(std::istream& in = cin);
 
 	bool operator !=(Staff& obj);
 	bool operator >(Staff& obj);

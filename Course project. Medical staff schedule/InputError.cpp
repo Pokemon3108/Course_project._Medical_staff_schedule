@@ -69,33 +69,6 @@ void inputLettersAndNumbers(std::istream& in, string & str)
 	} while (!flag);
 }
 
-void inputWeekDay(std::istream & in, string & str)
-{
-	bool flag;
-	do
-	{
-		try
-		{
-			flag = 1;
-			inputLetters(in, str);
-			std::vector<string> vect{ "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье" };
-			for (int i = 0; i < 7; ++i)
-			{
-				if (str == vect[i]) return;
-			}
-			throw InputError(6, "Вы ввели не день недели. Проверьте, возможно день недели был введён с маленькой буквы");
-		}
-		catch (InputError& exception)
-		{
-			flag = 0;
-			cerr << "Код:" << exception.getCode() << endl << "Описание:" << exception.what() << endl;
-			str.clear();
-		}
-
-	} while (!flag);
-	
-}
-
 void inputYesNo(std::istream & in, string & str)
 {
 	bool flag;
