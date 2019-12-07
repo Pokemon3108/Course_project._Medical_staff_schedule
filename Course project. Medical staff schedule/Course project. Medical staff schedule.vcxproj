@@ -154,8 +154,10 @@
     <ClInclude Include="AdministrativeStaff.h" />
     <ClInclude Include="Algorithm.h" />
     <ClInclude Include="Cancel.h" />
+    <ClInclude Include="Colour.h" />
     <ClInclude Include="Doctor.h" />
     <ClInclude Include="Exception.h" />
+    <ClInclude Include="File.h" />
     <ClInclude Include="Functor.h" />
     <ClInclude Include="InputError.h" />
     <ClInclude Include="Interface.h" />
@@ -170,9 +172,11 @@
   <ItemGroup>
     <ClCompile Include="AdministrativeStaff.cpp" />
     <ClCompile Include="Cancel.cpp" />
+    <ClCompile Include="Colour.cpp" />
     <ClCompile Include="Course project. Medical staff schedule.cpp" />
     <ClCompile Include="Doctor.cpp" />
     <ClCompile Include="Exception.cpp" />
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="Functor.cpp" />
     <ClCompile Include="InputError.cpp" />
     <ClCompile Include="Interface.cpp" />

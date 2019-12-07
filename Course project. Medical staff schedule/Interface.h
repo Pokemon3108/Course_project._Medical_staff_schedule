@@ -40,7 +40,7 @@ void Interface<T>::menu()
 		cout << "4-Обслуживающий персонал" << endl;
 		cout << "0-Выйти из программы" << endl;
 		inputNumber(cin, n, 0, 4);
-
+		system("cls");
 		switch (n)
 		{
 		case 1:
@@ -87,7 +87,7 @@ bool Interface<T>::action(const char* filename)
 	int n;
 	do
 	{
-		cout << "\n1-Добавить объект" << endl;
+		cout << "1-Добавить объект" << endl;
 		cout << "2-Вывести информацию о всех объектах" << endl;
 		cout << "3-Удалить объект" << endl;
 		cout << "4-Удалить всё" << endl;
@@ -99,7 +99,7 @@ bool Interface<T>::action(const char* filename)
 		cout << "0-Конец программы" << endl;
 
 		inputNumber(cin, n, 0, 9);
-
+		system("cls");
 
 		switch (n)
 		{
@@ -108,7 +108,7 @@ bool Interface<T>::action(const char* filename)
 		{
 			int size1 = size(tree.begin(), tree.end());
 			T obj;
-			cout << "\nВведите объект" << endl;
+			cout << "Введите объект:" << endl;
 			cin >> obj;
 			tree.push(obj);
 			int size2 = size(tree.begin(), tree.end());
@@ -135,7 +135,7 @@ bool Interface<T>::action(const char* filename)
 		{
 			int size1 = size(tree.begin(), tree.end());
 			T obj;
-			cout << "\nВведите объект" << endl;
+			cout << "Введите объект" << endl;
 			obj.inputFullName(); //ввели полное имя
 			Node<T>* temp = tree.search(obj); //нашли объект с таким именем
 			if (temp)
@@ -194,7 +194,6 @@ bool Interface<T>::action(const char* filename)
 				} while (act != 2);
 
 			}
-
 			break;
 		}
 		case 6:
@@ -250,6 +249,8 @@ bool Interface<T>::action(const char* filename)
 		}
 		
 		}
+		system("pause");
+		system("cls");
 	} while (n);
 	return 0;
 }

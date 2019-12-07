@@ -132,6 +132,7 @@ void Staff::outputGraphic(std::ostream & out, bool flag)
 	
 void Staff::table(std::ostream & out)
 {
+	
 	using namespace std;
 	out << setiosflags(ios::left) << setw(15) << "|Имя" << setw(20) << "|Фамилия" << setw(20) << "|Отчество";
 }
@@ -142,6 +143,7 @@ void Staff::tableLines(std::ostream & out) const
 	string str1(14, '-');
 	string str2(19, '-');
 	out << str1 << '+' << str2 << '+' << str2 << '+';
+	
 }
 
 void Staff::graphicLines(std::ostream & out)

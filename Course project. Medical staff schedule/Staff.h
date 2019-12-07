@@ -3,6 +3,7 @@
 #include <list>
 #include "InputError.h"
 #include <vector>
+#include "Colour.h"
 
 struct graphic
 {
