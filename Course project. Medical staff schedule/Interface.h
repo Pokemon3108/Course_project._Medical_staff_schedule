@@ -8,6 +8,7 @@
 #include "Tree.h"
 #include "Algorithm.h"
 #include "Cancel.h"
+#include "File.h"
 
 template <typename T>
 class Interface
@@ -82,8 +83,11 @@ bool Interface<T>::action(const char* filename)
 {
 	stack <Cancel<T>> st;
 	Tree<T> tree;
-	std::ifstream in(filename);
-	tree.readFromFile(in);
+	File<T> file;
+	file.openForRead(filename);
+	file.readFromFile(tree);
+	//std::ifstream in(filename);
+	//tree.readFromFile(in);
 	int n;
 	do
 	{
@@ -242,8 +246,10 @@ bool Interface<T>::action(const char* filename)
 			inputYesNo(cin, str);
 			if (str == "да" || str=="Да")
 			{
-				std::ofstream out(filename);
-				tree.writeToFile(tree.getRoot(), out);
+				/*std::ofstream out(filename);
+				tree.writeToFile(tree.getRoot(), out);*/
+				file.openForWrite(filename);
+				file.writeToFile(tree.getRoot());
 			}
 			else return n;
 		}

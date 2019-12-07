@@ -64,11 +64,6 @@ void Nurse::tableLines(std::ostream & out) const
 	obj.graphicLines(out);
 }
 
-void Nurse::writeToFile(std::ofstream & out)
-{
-	out << (*this);
-}
-
 void Nurse::chooseParameters()
 {
 	MedicalStaff::chooseParameters();

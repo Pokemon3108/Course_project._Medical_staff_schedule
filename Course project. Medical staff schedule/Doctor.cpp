@@ -79,11 +79,6 @@ void Doctor::tableLines(std::ostream & out) const
 	
 }
 
-void Doctor::writeToFile(std::ofstream & out)
-{
-	out << (*this);
-}
-
 void Doctor::chooseParameters()
 {
 	MedicalStaff::chooseParameters();

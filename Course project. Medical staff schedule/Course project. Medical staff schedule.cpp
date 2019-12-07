@@ -9,6 +9,5 @@ int main()
 	SetConsoleOutputCP(1251);
 	Interface<int> obj;
 	obj.menu();
-	system("pause");
 }
 

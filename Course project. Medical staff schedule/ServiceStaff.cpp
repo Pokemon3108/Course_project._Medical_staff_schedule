@@ -46,11 +46,6 @@ void ServiceStaff::tableLines(std::ostream & out) const
 	obj.graphicLines(out);
 }
 
-void ServiceStaff::writeToFile(std::ofstream & out)
-{
-	out << (*this);
-}
-
 void ServiceStaff::edit(int n)
 {
 	TechnicalStaff::edit(n);

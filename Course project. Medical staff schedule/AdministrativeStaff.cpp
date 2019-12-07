@@ -92,11 +92,6 @@ void AdministrativeStaff::tableLines(std::ostream & out) const
 	obj.graphicLines(out);
 }
 
-void AdministrativeStaff::writeToFile(std::ofstream & out)
-{
-	out << (*this);
-}
-
 void AdministrativeStaff::edit(int n)
 {
 	TechnicalStaff::edit(n);

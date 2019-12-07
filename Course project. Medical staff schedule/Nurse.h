@@ -23,8 +23,6 @@ public:
 	virtual void table(std::ostream & out) override;
 	virtual void tableLines(std::ostream& out) const;
 
-	void writeToFile(std::ofstream& out);
-
 	virtual void chooseParameters() override;
 	virtual string getParameter(int n) override;
 

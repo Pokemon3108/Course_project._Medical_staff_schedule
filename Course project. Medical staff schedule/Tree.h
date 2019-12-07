@@ -66,9 +66,6 @@ public:
 
 	Node<T> * search(T & obj) const;
 
-	void writeToFile(Node<T>* root, std::ofstream& out);
-	void readFromFile(std::ifstream& in);
-
 	void show(bool flag);
 
 	void pop(T obj);
@@ -128,29 +125,6 @@ Node<T>* Tree<T>::search(T & obj) const
 
 	}
 	return temp;
-}
-
-template <typename T>
-void Tree<T>::writeToFile(Node<T>* root, std::ofstream& out)
-{
-	if (!root) return;
-	(root->data).writeToFile(out);
-	writeToFile(root->left,out);
-	writeToFile(root->right,out);
-}
-
-template<typename T>
-void Tree<T>::readFromFile(std::ifstream & in)
-{
-	T obj;
-	while (in.peek() == '\n')
-		in.get();
-	while (!in.eof())
-	{
-		in >> obj;
-		push(obj);
-		char c=in.peek();
-	}
 }
 
 
