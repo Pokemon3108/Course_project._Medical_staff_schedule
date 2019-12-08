@@ -28,7 +28,7 @@ public:
 
 	virtual void edit(int n) override;
 
-	bool operator ==(TechnicalStaff& obj);
+	//bool operator ==(TechnicalStaff& obj);
 
 	string getProfession();
 	void setProfession(string profession_);

@@ -2,19 +2,19 @@
 #include "MedicalStaff.h"
 
 
-bool MedicalStaff::operator==(MedicalStaff & obj)
-{
-	return (dynamic_cast<Staff&>(obj) == *(dynamic_cast<Staff*>(this)) && obj.department == department);
-}
+//bool MedicalStaff::operator==(MedicalStaff & obj)
+//{
+//	return (dynamic_cast<Staff&>(obj) == *(dynamic_cast<Staff*>(this)) && obj.department == department);
+//}
 
 string MedicalStaff::getDepartment() const
 {
 	return department;
 }
 
-void MedicalStaff::setDepartment(string department)
+void MedicalStaff::setDepartment(string department_)
 {
-	department = department;
+	department = department_;
 }
 
 std::istream & operator>>(std::istream & in, MedicalStaff & obj)

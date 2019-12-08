@@ -35,7 +35,7 @@ std::ifstream & operator>>(std::ifstream & in, Staff & obj)
 	{
 		in >> gr.hour1 >> gr.hour2;
 		in.get();
-		std::getline(in, gr.weekday, '\n');
+		std::getline(in, gr.weekday, ' ');
 		obj.work_graphic.push_back(gr);
 	}
 	in >> size;
@@ -43,7 +43,7 @@ std::ifstream & operator>>(std::ifstream & in, Staff & obj)
 	{
 		in >> gr.hour1 >> gr.hour2;
 		in.get();
-		std::getline(in, gr.weekday, '\n');
+		std::getline(in, gr.weekday, ' ');
 		obj.duty_graphic.push_back(gr);
 	}
 
@@ -55,14 +55,14 @@ std::ofstream & operator<<(std::ofstream & out, Staff & obj)
 	out << obj.firstName << '\n' << obj.surname << '\n' << obj.fatherName << '\n';
 	list<graphic>::iterator it;
 	int size = obj.work_graphic.size();
-	out << size << '\n';
+	out << size << ' ';
 	for (it = obj.work_graphic.begin(); it != obj.work_graphic.end(); ++it)
-		out << it->hour1 << '\n' << it->hour2 << '\n' << it->weekday << '\n';
+		out << it->hour1 << ' ' << it->hour2 << ' ' << it->weekday << ' ';
 	
 	size = obj.duty_graphic.size();
-	out << size << '\n';
+	out << size << ' ';
 	for (it = obj.duty_graphic.begin(); it != obj.duty_graphic.end(); ++it)
-		out << it->hour1<<'\n'<< it->hour2<<'\n' << it->weekday << '\n';
+		out << it->hour1<<' '<< it->hour2<<' ' << it->weekday << ' ';
 	
 	return out;
 }
@@ -132,7 +132,6 @@ void Staff::outputGraphic(std::ostream & out, bool flag)
 	
 void Staff::table(std::ostream & out)
 {
-	
 	using namespace std;
 	out << setiosflags(ios::left) << setw(15) << "|Имя" << setw(20) << "|Фамилия" << setw(20) << "|Отчество";
 }
@@ -168,7 +167,7 @@ void Staff::chooseParameters()
 	cout << "5-День недели в графике работы" << endl;
 }
 
-std::string Staff::getParameter(int n)
+string Staff::getParameter(int n)
 {
 	switch (n)
 	{
@@ -242,7 +241,7 @@ void Staff::edit(int n)
 	}
 }
 
-void Staff::editGraphic(string day, int listType)
+void Staff::editGraphic(string day, bool listType)
 {
 	cout << "1-Отредактировать день\n" <<"2-Добавить день\n"<< "0-Удалить день" << endl;
 	int operation;
@@ -327,7 +326,6 @@ bool Staff::operator>(Staff & obj)
 	else if (firstName != obj.surname)
 		return (firstName > obj.firstName);
 	else return fatherName > obj.fatherName;
-
 }
 
 bool Staff::operator<(Staff & obj)
@@ -355,9 +353,9 @@ string Staff::getSurname() const
 	return surname;
 }
 
-void Staff::setSurname(string sur)
+void Staff::setSurname(string surname_)
 {
-	surname = sur;
+	surname = surname_;
 }
 
 string Staff::getFatherName() const

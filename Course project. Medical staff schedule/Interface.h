@@ -9,6 +9,7 @@
 #include "Algorithm.h"
 #include "Cancel.h"
 #include "File.h"
+#include "FileError.h"
 
 template <typename T>
 class Interface
@@ -84,10 +85,10 @@ bool Interface<T>::action(const char* filename)
 	stack <Cancel<T>> st;
 	Tree<T> tree;
 	File<T> file;
-	file.openForRead(filename);
+	//file.openForRead(filename);
+	openForRead(file.getIn(),filename);
+	//bool a=file.getin().is_open();
 	file.readFromFile(tree);
-	//std::ifstream in(filename);
-	//tree.readFromFile(in);
 	int n;
 	do
 	{
@@ -110,14 +111,15 @@ bool Interface<T>::action(const char* filename)
 
 		case 1:
 		{
-			int size1 = size(tree.begin(), tree.end());
 			T obj;
 			cout << "Введите объект:" << endl;
 			cin >> obj;
-			tree.push(obj);
-			int size2 = size(tree.begin(), tree.end());
-			if (size2 > size1)
+			Node<T>* temp = tree.search(obj);
+			if (temp) cout << "Объект с таким именем уже существует" << endl;
+			else {
+				tree.push(obj);
 				st.push(Cancel<T>("push", obj));
+			}
 			break;
 		}
 
@@ -137,7 +139,6 @@ bool Interface<T>::action(const char* filename)
 
 		case 3:
 		{
-			int size1 = size(tree.begin(), tree.end());
 			T obj;
 			cout << "Введите объект" << endl;
 			obj.inputFullName(); //ввели полное имя
@@ -146,9 +147,7 @@ bool Interface<T>::action(const char* filename)
 			{
 				obj = temp->data; //записали его в объект
 				tree.pop(obj); //удалили его
-				int size2 = size(tree.begin(), tree.end());
-				if (size2 < size1)
-					st.push(Cancel<T>("pop", obj));
+				st.push(Cancel<T>("pop", obj));
 			}
 			else cout << "Работника с таким именем не существует" << endl;
 			break;
@@ -248,7 +247,8 @@ bool Interface<T>::action(const char* filename)
 			{
 				/*std::ofstream out(filename);
 				tree.writeToFile(tree.getRoot(), out);*/
-				file.openForWrite(filename);
+				//file.openForWrite(filename);
+				openForWrite(file.getOut(),filename);
 				file.writeToFile(tree.getRoot());
 			}
 			else return n;

@@ -11,10 +11,10 @@ void TechnicalStaff::edit(int n)
 	}
 }
 
-bool TechnicalStaff::operator==(TechnicalStaff & obj)
-{
-	return (dynamic_cast<Staff&>(obj) == *(dynamic_cast<Staff*>(this)) && obj.profession==profession);
-}
+//bool TechnicalStaff::operator==(TechnicalStaff & obj)
+//{
+//	return (dynamic_cast<Staff&>(obj) == *(dynamic_cast<Staff*>(this)) && obj.profession==profession);
+//}
 
 string TechnicalStaff::getProfession()
 {
@@ -38,7 +38,7 @@ std::ostream & operator<<(std::ostream & out, const TechnicalStaff & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const Staff&>(obj);
-	out << setiosflags(ios::left) << setw(19) << obj.profession<<'|';
+	out << setiosflags(ios::left) << setw(24) << obj.profession<<'|';
 	return out;
 }
 
@@ -84,12 +84,12 @@ string TechnicalStaff::getParameter(int n)
 void TechnicalStaff::table(std::ostream & out)
 {
 	Staff::table(out);
-	out << std::setiosflags(std::ios::left) << setw(20) << "|Должность";
+	out << std::setiosflags(std::ios::left) << setw(25) << "|Должность";
 }
 
 void TechnicalStaff::tableLines(std::ostream & out) const
 {
 	Staff::tableLines(out);
-	string str1(19, '-');
+	string str1(24, '-');
 	out << str1 << '+';
 }

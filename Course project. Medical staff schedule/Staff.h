@@ -1,6 +1,5 @@
 #pragma once
-#include <iostream>
-#include <list>
+#include "pch.h"
 #include "InputError.h"
 #include <vector>
 #include "Colour.h"
@@ -42,10 +41,10 @@ public:
 	
 
 	virtual void chooseParameters();
-	virtual std::string getParameter(int n);
+	virtual string getParameter(int n);
 
 	virtual void edit(int n);
-	void editGraphic(string day, int listType);
+	void editGraphic(string day, bool listType);
 	
 	void inputFullName(std::istream& in=cin);
 	void inputHours(graphic& gr, std::istream& in = cin);
@@ -60,10 +59,10 @@ public:
 	void setFirstName(string name);
 	
 	string getSurname() const;
-	void setSurname(string sur);
+	void setSurname(string surname_);
 	
 	string getFatherName() const;
-	void setFatherName(string fatherName_);
+	void setFatherName(string fatherName_); 
 	
 	int getHour1(string day, list<graphic>& gr) const;
 	void setHour1(string day, int hour, list<graphic>& gr);

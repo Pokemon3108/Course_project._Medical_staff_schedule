@@ -35,11 +35,11 @@ std::ofstream & operator<<(std::ofstream & out, Doctor & obj)
 
 }
 
-bool Doctor::operator==(Doctor & obj)
-{
-	return (dynamic_cast<MedicalStaff&>(obj) == *(dynamic_cast<MedicalStaff*>(this)) && obj.category==category
-		&& obj.speciality==speciality);
-}
+//bool Doctor::operator==(Doctor & obj)
+//{
+//	return (dynamic_cast<MedicalStaff&>(obj) == *(dynamic_cast<MedicalStaff*>(this)) && obj.category==category
+//		&& obj.speciality==speciality);
+//}
 
 string Doctor::getCategory()
 {

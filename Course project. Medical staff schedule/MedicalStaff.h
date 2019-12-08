@@ -22,13 +22,13 @@ public:
 	virtual void tableLines(std::ostream& out) const override;
 
 	virtual void chooseParameters() override;
-	virtual std::string getParameter(int n) override;
+	virtual string getParameter(int n) override;
 
 	virtual void edit(int n) override;
 
-	bool operator ==(MedicalStaff& obj);
+	//bool operator ==(MedicalStaff& obj);
 
 	string getDepartment() const;
-	void setDepartment(string department);
+	void setDepartment(string department_);
 };
 

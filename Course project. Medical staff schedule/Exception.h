@@ -4,12 +4,12 @@
 class Exception
 {
 protected:
-	std::string errorText;
+	string errorText;
 public:
-	Exception(std::string str) : errorText(str)
+	Exception(string str) : errorText(str)
 	{}
 	~Exception()
-	{};
+	{}
 
-	std::string what();
+	string what();
 };

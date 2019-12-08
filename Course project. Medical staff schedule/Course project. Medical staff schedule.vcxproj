@@ -158,6 +158,7 @@
     <ClInclude Include="Doctor.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="File.h" />
+    <ClInclude Include="FileError.h" />
     <ClInclude Include="Functor.h" />
     <ClInclude Include="InputError.h" />
     <ClInclude Include="Interface.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="Doctor.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="File.cpp" />
+    <ClCompile Include="FileError.cpp" />
     <ClCompile Include="Functor.cpp" />
     <ClCompile Include="InputError.cpp" />
     <ClCompile Include="Interface.cpp" />

@@ -66,6 +66,9 @@
     <ClInclude Include="File.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="FileError.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -117,6 +120,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="File.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="FileError.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

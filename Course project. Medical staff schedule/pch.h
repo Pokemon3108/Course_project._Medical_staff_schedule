@@ -7,7 +7,7 @@
 #include <list>
 #include <fstream>
 #include <stack>
-
+#include <string>
 using std::endl;
 using std::list;
 using std::set;

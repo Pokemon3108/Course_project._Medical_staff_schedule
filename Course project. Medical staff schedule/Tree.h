@@ -24,6 +24,7 @@ public:
 	{
 	private:
 		Node<T>* ptr;
+		
 	public:
 		Iterator() : ptr(nullptr) {};
 
@@ -68,10 +69,11 @@ public:
 
 	void show(bool flag);
 
-	void pop(T obj);
 	void deleteItem(Node<T>* &ptr, T data);
 	void deleteNewRootItem(Node<T>*& nodeptr);
 	void mostLeftItem(Node<T>* &nodeptr, T& value);
+	
+	void pop(T obj);
 
 	void destroyTree(Node<T>* &root);
 
@@ -92,7 +94,6 @@ void Tree<T>::push(T obj)
 template<typename T>
 void Tree<T>::insert(Node<T>* &root, T data, Node<T>* parent)
 {
-
 	Node<T>* temp = root;
 	if (!root)
 	{
@@ -196,6 +197,9 @@ void Tree<T>::mostLeftItem(Node<T> * &nodeptr, T& value)
 	else mostLeftItem(nodeptr->left, value);
 }
 
+
+
+
 template <typename T>
 void Tree<T>::destroyTree(Node<T>*&root)
 {
@@ -244,6 +248,7 @@ typename Tree<T>::Iterator Tree<T>::end()
 	it.ptr = curr;
 	return it;
 }
+
 
 template<typename T>
 T& Tree<T>::Iterator::operator*()

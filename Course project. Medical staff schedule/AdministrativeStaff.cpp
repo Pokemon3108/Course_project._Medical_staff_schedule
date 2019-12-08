@@ -32,11 +32,11 @@ std::ofstream & operator<<(std::ofstream & out, AdministrativeStaff & obj)
 	return out;
 }
 
-bool AdministrativeStaff::operator==(AdministrativeStaff & obj)
-{
-	return (dynamic_cast<TechnicalStaff&>(obj) == *(dynamic_cast<TechnicalStaff*>(this)) 
-		&& obj.roomNumber == roomNumber);
-}
+//bool AdministrativeStaff::operator==(AdministrativeStaff & obj)
+//{
+//	return (dynamic_cast<TechnicalStaff&>(obj) == *(dynamic_cast<TechnicalStaff*>(this)) 
+//		&& obj.roomNumber == roomNumber);
+//}
 
 string AdministrativeStaff::getRoomNumber()
 {

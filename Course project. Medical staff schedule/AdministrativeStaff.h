@@ -29,7 +29,7 @@ public:
 
 	virtual void edit(int n) override;
 
-	bool operator==(AdministrativeStaff& obj);
+	//bool operator==(AdministrativeStaff& obj);
 
 	string getRoomNumber();
 	void setRoomNumber(string room);
