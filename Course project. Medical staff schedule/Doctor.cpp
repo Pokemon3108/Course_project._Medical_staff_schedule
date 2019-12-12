@@ -15,14 +15,15 @@ std::ostream & operator<<(std::ostream & out, const Doctor & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const MedicalStaff&>(obj);
-	out << setiosflags(ios::left) << setw(10) << obj.category<<'|'<<setw(19)<<obj.speciality<<'|';
+	out << setiosflags(ios::left) << setw(10) << obj.category<< color<12, 2> << '|' << color<> << setw(10) 
+		<<setw(19) << obj.speciality << color<12, 2> << '|' << color<>;
 	return out;
 }
 
 std::ifstream & operator>>(std::ifstream & in, Doctor & obj)
 {
 	in >> dynamic_cast<MedicalStaff&>(obj);
-	std::getline(in, obj.category, '\n');
+	std::getline(in, obj.category, '|');
 	std::getline(in, obj.speciality, '\n');
 	return in;
 }
@@ -30,7 +31,7 @@ std::ifstream & operator>>(std::ifstream & in, Doctor & obj)
 std::ofstream & operator<<(std::ofstream & out, Doctor & obj)
 {
 	out << dynamic_cast<MedicalStaff&>(obj);
-	out << obj.category << '\n' << obj.speciality << '\n';
+	out << obj.category << '|' << obj.speciality << '\n';
 	return out;
 
 }
@@ -65,7 +66,8 @@ void Doctor::table(std::ostream & out)
 {
 	using namespace std;
 	MedicalStaff::table(out);
-	out << setiosflags(ios::left) << setw(11) << "|Категория" << setw(20) << "|Специальность";
+	out << setiosflags(ios::left) << color<12, 2> << '|' << color<> << setw(10) << "Категория" << 
+		color<12, 2> << '|' << color<> << setw(19) << "Специальность";
 }
 
 void Doctor::tableLines(std::ostream & out) const
@@ -74,6 +76,7 @@ void Doctor::tableLines(std::ostream & out) const
 	string str1(10, '-');
 	string str2(19, '-');
 	out << str1 << '+' << str2 << '+';
+	
 	Doctor obj;
 	obj.graphicLines(out);
 	
@@ -105,8 +108,6 @@ string Doctor::getParameter(int n)
 				std::cout << "Специальность:" << endl;
 				inputLetters(cin, speciality);
 				return "speciality";
-			default:
-				i = 1;
 			}
 		}
 	} while (i);

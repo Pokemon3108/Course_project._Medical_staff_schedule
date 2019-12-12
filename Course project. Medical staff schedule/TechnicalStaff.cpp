@@ -38,14 +38,14 @@ std::ostream & operator<<(std::ostream & out, const TechnicalStaff & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const Staff&>(obj);
-	out << setiosflags(ios::left) << setw(24) << obj.profession<<'|';
+	out << setiosflags(ios::left) << setw(24) << obj.profession<< color<12, 2> << '|' << color<>;
 	return out;
 }
 
 std::ifstream & operator>>(std::ifstream & in, TechnicalStaff & obj)
 {
 	in >> dynamic_cast<Staff&>(obj);
-	std::getline(in, obj.profession, '\n');
+	std::getline(in, obj.profession, '|');
 	return in;
 }
 
@@ -84,7 +84,7 @@ string TechnicalStaff::getParameter(int n)
 void TechnicalStaff::table(std::ostream & out)
 {
 	Staff::table(out);
-	out << std::setiosflags(std::ios::left) << setw(25) << "|Должность";
+	out << std::setiosflags(std::ios::left) << color<12, 2> << '|' << color<><< setw(24) << "Должность";
 }
 
 void TechnicalStaff::tableLines(std::ostream & out) const

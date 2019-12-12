@@ -6,19 +6,19 @@
 
 struct graphic
 {
-	int hour1;
-	int hour2;
-	string weekday;
+	int hour1; //первый час работы/дежурства
+	int hour2; //последний час работы/дежурства
+	string weekday; //день недели в графике работы/дежурств
 };
 
 class Staff abstract
 {
 protected:
-	string firstName;
-	string surname;
-	string fatherName;
-	list<graphic> work_graphic;
-	list<graphic> duty_graphic;
+	string firstName; //имя работника
+	string surname; //фамилия работника
+	string fatherName; //отчество работника
+	list<graphic> work_graphic; //график работы
+	list<graphic> duty_graphic; //график дежурств
 public:
 	Staff() = default;
 	Staff(string firstName, string surname_, string fatherName, list<graphic> work, list<graphic> duty) :
@@ -27,51 +27,52 @@ public:
 		work_graphic(obj.work_graphic), duty_graphic(obj.duty_graphic) {}
 	~Staff() {}
 
-	friend std::istream& operator >> (std::istream& in, Staff& obj);
-	friend std::ostream& operator << (std::ostream& out, const Staff& obj);
-	friend std::ifstream& operator >>(std::ifstream& in, Staff& obj);
-	friend std::ofstream& operator << (std::ofstream& out, Staff& obj);
+	friend std::istream& operator >> (std::istream& in, Staff& obj); //инициализация объекта класса Staff с консоли
+	friend std::ostream& operator << (std::ostream& out, const Staff& obj); //вывод объекта класса Staff на экран
+	friend std::ifstream& operator >>(std::ifstream& in, Staff& obj); //чтение объекта класса Staff из файла
+	friend std::ofstream& operator << (std::ofstream& out, Staff& obj); //запись объекта класса ServiceStaff в файл
 
-	void inputGraphic(std::istream& in, list<graphic>& list_graphic);
-	virtual void table(std::ostream & out);
-	virtual void tableLines(std::ostream& out) const;
-	virtual void graphicLines(std::ostream& out);
-	void tableGraphic(std::ostream & out);
-	void outputGraphic(std::ostream & out, bool flag);
+	void inputGraphic(std::istream& in, list<graphic>& list_graphic); //инициализация графика работы/дежурств
+	virtual void table(std::ostream & out);  //вывод шапки таблицы
+	virtual void tableLines(std::ostream& out) const; // вывод линий-разделителей в таблице
+	virtual void graphicLines(std::ostream& out); //вывод линий-разделителей для графика в таблице
+	void tableGraphic(std::ostream & out); //вывод шапки графика
+	void outputGraphic(std::ostream & out, bool flag); //вывод графика
 	
 
-	virtual void chooseParameters();
-	virtual string getParameter(int n);
+	virtual void chooseParameters(); //меню для выбора параметра для поиска/редактирования
+	virtual string getParameter(int n); //возвращает строку с названием поля, которое подлежит редатированию
 
-	virtual void edit(int n);
-	void editGraphic(string day, bool listType);
+	virtual void edit(int n); //редактирование выбранного поля в объекте класса Staff
+	void editGraphic(string day, bool listType); //редактирование графика
 	
-	void inputFullName(std::istream& in=cin);
-	void inputHours(graphic& gr, std::istream& in = cin);
-	string inputWeekDay(std::istream& in = cin);
+	void inputFullName(std::istream& in=cin); //инициализация полного имени работника
+	void inputHours(graphic& gr, std::istream& in = cin); //инициализация часов в графике
+	string inputWeekDay(std::istream& in = cin); //возвращает введённый день недели
 
-	bool operator !=(Staff& obj);
-	bool operator >(Staff& obj);
-	bool operator <(Staff& obj);
-	bool operator ==(Staff& obj);
+	bool operator !=(Staff& obj); //проверка на равенство полных имён работников
+	bool operator >(Staff& obj); //сравнение полных имён работников
+	bool operator <(Staff& obj); //сравнение полных имён работников
+	bool operator ==(Staff& obj); //проверка на равенство полных имён работников
 	
-	string getFirstName() const;
-	void setFirstName(string name);
+	string getFirstName() const; //возвращает имя работника
+	void setFirstName(string name); //устанавливает имя работника
 	
-	string getSurname() const;
-	void setSurname(string surname_);
+	string getSurname() const; //возвращает фамилию работника
+	void setSurname(string surname_); //устанавливает фамилию работника
 	
-	string getFatherName() const;
-	void setFatherName(string fatherName_); 
+	string getFatherName() const; //возвращает отчество работника
+	void setFatherName(string fatherName_); //устанавливает отчество работника
 	
-	int getHour1(string day, list<graphic>& gr) const;
-	void setHour1(string day, int hour, list<graphic>& gr);
+	int getHour1(string day, list<graphic>& gr) const; //возвращает первый час в определённом дне из графике
+	void setHour1(string day, int hour, list<graphic>& gr); //устанавливает первый час в определённом дне из графике
 	
-	int getHour2(string day, list<graphic>& gr) const;
-	void setHour2(string day, int hour, list<graphic>& gr);
+	int getHour2(string day, list<graphic>& gr) const; //возвращает второй час в определённом дне из графике
+	void setHour2(string day, int hour, list<graphic>& gr); //устанавливает второй час в определённом дне из графике
 
-	list<graphic>& getDutyGraphic();
-	list<graphic>& getWorkGraphic();
+	list<graphic>& getDutyGraphic(); //возвращает график дежурств
+	list<graphic>& getWorkGraphic(); //возвращает график работы
 
-	bool daysInGraphic(list<graphic>& objInTree, list<graphic>& objSearch);
+	bool daysInGraphic(list<graphic>& objInTree, list<graphic>& objSearch); //определяет, входит ли objSearch в objInTree
 };
+

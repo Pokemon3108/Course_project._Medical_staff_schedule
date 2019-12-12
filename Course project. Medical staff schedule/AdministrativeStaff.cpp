@@ -4,17 +4,18 @@
 
 std::istream & operator>>(std::istream & in, AdministrativeStaff & obj)
 {
-	in >> dynamic_cast<TechnicalStaff&>(obj);
+	in >> dynamic_cast<TechnicalStaff&>(obj); 
 	cout << "Кабинет:";
-	inputLettersAndNumbers(in, obj.roomNumber);
+	inputLettersAndNumbers(in, obj.roomNumber); 
 	return in;
 }
 
 std::ostream & operator<<(std::ostream & out, const AdministrativeStaff & obj)
 {
+	//вывод объекта в таблицу с разделителями и цветными границами
 	using namespace std;
 	out << dynamic_cast<const TechnicalStaff&>(obj);
-	out << setiosflags(ios::left) << setw(7) << obj.roomNumber<<'|';
+	out << setiosflags(ios::left) << setw(7) << obj.roomNumber<< color<12, 2> << '|' << color<>;  
 	return out;
 }
 
@@ -57,11 +58,11 @@ void AdministrativeStaff::chooseParameters()
 string AdministrativeStaff::getParameter(int n)
 {
 	int i = 0;
-	string parameter;
+	string parameter; //параметр, который определяет какое поле было выбрано для поиска
 	do
 	{
-		parameter = TechnicalStaff::getParameter(n);
-		if (parameter == "")
+		parameter = TechnicalStaff::getParameter(n); //получаем выбрааное поле родительского класса
+		if (parameter == "") //если поля родительских классов не были выбраны
 		{
 			switch (n)
 			{
@@ -69,8 +70,10 @@ string AdministrativeStaff::getParameter(int n)
 				std::cout << "Кабинет:";
 				inputLettersAndNumbers(cin, roomNumber);
 				return "roomNumber";
-			default:
-				i = 1;
+			default: //проверка на введённое пользователем число в случае невыполнения ни одного из case
+				cout << "Введённое число не принадлежит заданному диапазону. Введите новый параметр: ";
+				inputNumber(cin, n, 1, 7);
+				i = 1; //цикл пройдет заново
 			}
 		}
 	} while (i);
@@ -80,22 +83,22 @@ string AdministrativeStaff::getParameter(int n)
 void AdministrativeStaff::table(std::ostream & out)
 {
 	TechnicalStaff::table(out);
-	out << std::setiosflags(std::ios::left) << setw(8) << "|Кабинет";
+	out << std::setiosflags(std::ios::left) << color<12, 2> << '|' << color<> <<setw(7) << "Кабинет";
 }
 
 void AdministrativeStaff::tableLines(std::ostream & out) const
 {
-	TechnicalStaff::tableLines(out);
+	TechnicalStaff::tableLines(out); //вывод линий для полей родительского класса
 	string str1(7, '-');
 	out << str1 << '+';
 	AdministrativeStaff obj;
-	obj.graphicLines(out);
+	obj.graphicLines(out); //вывод линий графика
 }
 
 void AdministrativeStaff::edit(int n)
 {
 	TechnicalStaff::edit(n);
-	if (n == 7)
+	if (n == 7) 
 	{
 		std::cout << "Кабинет:";
 		inputLetters(cin, roomNumber);

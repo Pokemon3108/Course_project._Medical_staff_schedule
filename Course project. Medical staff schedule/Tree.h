@@ -4,10 +4,10 @@
 template <typename T>
 struct Node
 {
-	T data;
-	Node<T> *left;
-	Node<T> *right;
-	Node<T> *parent;
+	T data; //информация, хранящаяся в узле
+	Node<T> *left; //указатель на левый узел 
+	Node<T> *right; //указатель на правый узел
+	Node<T> *parent; //указатель на родительский узел
 };
 
 
@@ -16,26 +16,26 @@ class Tree
 {
 private:
 
-	Node<T> *root;
+	Node<T> *root; //указатель на корень дерева
 
 public:
 
 	class Iterator
 	{
 	private:
-		Node<T>* ptr;
+		Node<T>* ptr; //указатель на текущий узел дерева
 		
 	public:
 		Iterator() : ptr(nullptr) {};
 
-		T& operator*();
+		T& operator*(); //возвращает ссылку на объект, хранящийся в ptr
 
-		Iterator operator++(int);
-		Iterator operator--(int);
-		Iterator operator+=(int n);
+		Iterator operator++(int); //переход на следующий по возрастанию
+		Iterator operator--(int); //переход на следующий по убыванию
+		Iterator operator+=(int n); //переход на n узлов по возрастанию
 
-		bool operator==(Iterator it);
-		bool operator!=(Iterator it);
+		bool operator==(Iterator it); //сравнение указателей
+		bool operator!=(Iterator it); //сравнение указателей
 
 		Node<T>* getPtr()
 		{
@@ -62,25 +62,29 @@ public:
 		root->parent = nullptr;
 	}
 
-	void push(T obj);
-	void insert(Node<T>* &root, T data, Node<T>* parent);
+	void push(T obj); //вызывает рекурсивный метод вставки insert
+	void insert(Node<T>* &root, T data, Node<T>* parent); //вставляет data в дерево
 
-	Node<T> * search(T & obj) const;
+	Node<T> * search(T & obj) const; //поиск объекта в дереве
 
-	void show(bool flag);
+	void show(bool flag); //вывод информации, хранящейся в дереве
 
-	void deleteItem(Node<T>* &ptr, T data);
-	void deleteNewRootItem(Node<T>*& nodeptr);
-	void mostLeftItem(Node<T>* &nodeptr, T& value);
+	//рекурсивный метод поиска узла для удаления
+	//при нахождении переход к методу deleteNewRootItem, куда в параметр передаётся данный узел
+	//то есть в deleteNewRootItem он является корнем
+	void deleteItem(Node<T>* &ptr, T data); 
+
+	void deleteNewRootItem(Node<T>*& nodeptr); //удаление корня поддерева
+	void mostLeftItem(Node<T>* &nodeptr, T& value); //удаление самого левого узела
 	
-	void pop(T obj);
+	void pop(T obj); //вызывает рекурсивный метод удаления deleteItem
 
-	void destroyTree(Node<T>* &root);
+	void destroyTree(Node<T>* &root); //удаляет дерево полностью
 
-	Node<T>*& getRoot();
+	Node<T>*& getRoot(); //возвращает корень дерева
 
-	Iterator begin();
-	Iterator end();
+	Iterator begin(); //возвращает объекта класса Iterator на самый левый узел
+	Iterator end(); //возвращает объекта класса Iterator на самый правый узел
 
 	
 };
@@ -193,11 +197,11 @@ void Tree<T>::mostLeftItem(Node<T> * &nodeptr, T& value)
 		nodeptr = nodeptr->right;
 		if (nodeptr) nodeptr->parent = delptr->parent;
 		delete delptr;
+
 	}
 	else mostLeftItem(nodeptr->left, value);
+	
 }
-
-
 
 
 template <typename T>

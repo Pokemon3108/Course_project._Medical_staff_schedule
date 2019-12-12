@@ -4,12 +4,12 @@
 class Exception
 {
 protected:
-	string errorText;
+	string errorText; //текст ошибки
 public:
 	Exception(string str) : errorText(str)
 	{}
 	~Exception()
 	{}
 
-	string what();
+	string what(); //возвращает текст ошибки
 };

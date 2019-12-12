@@ -18,52 +18,52 @@ std::ostream & operator<<(std::ostream & out, const Staff & obj)
 {
 	obj.tableLines(out);
 	using namespace std;
-	out << setiosflags(ios::left) << '|'<<setw(14) << obj.firstName <<'|'<< setw(19)  << obj.surname <<'|'<< setw(19) 
-		<< obj.fatherName<<'|';
+	
+	out << setiosflags(ios::left) << color<12, 2> << '|' << color<> <<setw(14) << obj.firstName << color<12, 2> << '|' << color<>
+		<< setw(19)  << obj.surname << color<12, 2> << '|' << color<> << setw(19) << obj.fatherName<< color<12, 2> << '|' << color<>;
 	return out;
 }
 
 std::ifstream & operator>>(std::ifstream & in, Staff & obj)
 {
-	std::getline(in, obj.firstName, '\n');
-	std::getline(in, obj.surname, '\n');
-	std::getline(in, obj.fatherName, '\n');
-	int size;
-	in >> size;
+	std::getline(in, obj.firstName, '|');
+	std::getline(in, obj.surname, '|');
+	std::getline(in, obj.fatherName, '|');
+
 	graphic gr;
-	for (; size; --size)
+	obj.work_graphic.clear();
+	obj.duty_graphic.clear();
+	
+	while (in.peek() != '|')
 	{
+
 		in >> gr.hour1 >> gr.hour2;
-		in.get();
+		char c=in.get();
 		std::getline(in, gr.weekday, ' ');
 		obj.work_graphic.push_back(gr);
 	}
-	in >> size;
-	for (; size; --size)
+	in.get();
+	while (in.peek() != '|')
 	{
 		in >> gr.hour1 >> gr.hour2;
-		in.get();
+		char c=in.get();
 		std::getline(in, gr.weekday, ' ');
 		obj.duty_graphic.push_back(gr);
 	}
-
+	in.get();
 	return in;
 }
 
 std::ofstream & operator<<(std::ofstream & out, Staff & obj)
 {
-	out << obj.firstName << '\n' << obj.surname << '\n' << obj.fatherName << '\n';
+	out << obj.firstName << '|' << obj.surname << '|' << obj.fatherName << '|';
 	list<graphic>::iterator it;
-	int size = obj.work_graphic.size();
-	out << size << ' ';
 	for (it = obj.work_graphic.begin(); it != obj.work_graphic.end(); ++it)
 		out << it->hour1 << ' ' << it->hour2 << ' ' << it->weekday << ' ';
-	
-	size = obj.duty_graphic.size();
-	out << size << ' ';
+	out << '|';
 	for (it = obj.duty_graphic.begin(); it != obj.duty_graphic.end(); ++it)
 		out << it->hour1<<' '<< it->hour2<<' ' << it->weekday << ' ';
-	
+	out << '|';
 	return out;
 }
 
@@ -120,24 +120,30 @@ void Staff::outputGraphic(std::ostream & out, bool flag)
 				(it2->weekday == "Воскресенье" && i == 7))
 			{
 				fl = 0;
-				out << std::setiosflags(std::ios::left) << setw(11) << time << '|';
+				out << std::setiosflags(std::ios::left) << setw(11) << time << color<12, 2> << '|' << color<>;
 				break;
 			}
 
 		}
 		
-		if (fl) out << setw(11) << ' ' << '|';
+		if (fl) out << setw(11) << ' ' << color<12, 2> << '|' << color<>;
 	}
 }
 	
 void Staff::table(std::ostream & out)
 {
 	using namespace std;
-	out << setiosflags(ios::left) << setw(15) << "|Имя" << setw(20) << "|Фамилия" << setw(20) << "|Отчество";
+
+	//SetColor(14, 3);
+	//out << setiosflags(ios::left) <<color<1,2> <<'|' <<setw(15) << "|Имя" << setw(20) << "|Фамилия" << setw(20) << "|Отчество";
+	out << setiosflags(ios::left) << color<12, 2> << '|' << color<> << setw(14) << "Имя" << color<12, 2> << '|'<< color<> 
+		<< setw(19) << "Фамилия" << color<12, 2> <<'|'<< color<> <<setw(19) << "Отчество";
+	
 }
 
 void Staff::tableLines(std::ostream & out) const
 {
+	SetColor(12, 2);
 	out << '+';
 	string str1(14, '-');
 	string str2(19, '-');
@@ -148,13 +154,17 @@ void Staff::tableLines(std::ostream & out) const
 void Staff::graphicLines(std::ostream & out)
 {
 	string str1(11, '-');
-	out << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+' << endl;
+	out << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+' << str1 << '+';
+	SetColor(14, 3);
+	cout << endl;
 }
 
 void Staff::tableGraphic(std::ostream & out)
 {
-	cout << setw(12) << "|Понедельник" << setw(12) << "|Вторник" << setw(12) << "|Среда" << setw(12) << "|Четверг" << setw(12)
-		<< "|Пятница" << setw(12) << "|Суббота" << setw(12) << "|Воскресенье"<<'|'<<endl;
+	cout << color<12, 2> <<'|'<< color<> <<setw(11) << "Понедельник" << color<12, 2> << '|' << color<> <<setw(11) << "Вторник" <<
+		color<12, 2> << '|' << color<> << setw(11) << "Среда" << color<12, 2> << '|' << color<> << setw(11) << "Четверг" << 
+		color<12, 2> << '|' << color<> << setw(11) << "Пятница" << color<12, 2> << '|' << color<> << setw(11) << "Суббота" <<
+		color<12, 2> << '|' << color<> << setw(11) << "Воскресенье"<< color<12,2> <<'|'<<endl;
 }
 
 void Staff::chooseParameters()

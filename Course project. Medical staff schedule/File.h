@@ -5,9 +5,9 @@
 template<typename T>
 class File
 {
-	const char* filename;
-	std::ifstream in;
-	std::ofstream out;
+	const char* filename; //имя файла
+	std::ifstream in; //входной поток для работы с файлом
+	std::ofstream out; //выходной поток для работы с файлом
 public:
 	File()=default;
 	~File()
@@ -18,10 +18,10 @@ public:
 
 	//void openForWrite(const char* name);
 	//void openForRead(const char* name);
-	void readFromFile(Tree<T>& tree);
-	void writeToFile(Node<T>* root);
-	std::ifstream& getIn();
-	std::ofstream& getOut();
+	void readFromFile(Tree<T>& tree); //записывает информацию, хранящуюся в файле, в дерево
+	void writeToFile(Node<T>* root); //записывает информацию, хранящуюся в дереве, рекурсивно в файл
+	std::ifstream& getIn(); //возвращает поток для чтения
+	std::ofstream& getOut(); //возвращает поток для записи
 	
 	
 };

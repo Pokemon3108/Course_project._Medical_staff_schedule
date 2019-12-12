@@ -4,8 +4,8 @@
 class Doctor : public MedicalStaff
 {
 private:
-	string category;
-	string speciality;
+	string category; //категория
+	string speciality; //специальность
 
 public:
 	Doctor() = default;
@@ -16,25 +16,27 @@ public:
 		MedicalStaff(obj.department, obj.firstName, obj.surname, obj.fatherName, obj.work_graphic, obj.duty_graphic) {}
 	~Doctor() {};
 
-	friend std::istream& operator >> (std::istream& in, Doctor& obj);
-	friend std::ostream& operator << (std::ostream& out, const Doctor& obj);
-	friend std::ifstream& operator >>(std::ifstream& in, Doctor& obj);
-	friend std::ofstream& operator << (std::ofstream& out, Doctor& obj);
+	friend std::istream& operator >> (std::istream& in, Doctor& obj); //инициализация объекта класса Doctor с консоли
+	friend std::ostream& operator << (std::ostream& out, const Doctor& obj); //вывод объекта класса Doctor на экран
+	friend std::ifstream& operator >>(std::ifstream& in, Doctor& obj); //чтение объекта класса Doctor из файла
+	friend std::ofstream& operator << (std::ofstream& out, Doctor& obj); //запись объекта класса Doctor в файл
 
-	virtual void table(std::ostream & out) override;
-	virtual void tableLines(std::ostream& out)const override;
+	virtual void table(std::ostream & out) override; //вывод шапки таблицы
+	virtual void tableLines(std::ostream& out)const override; //вывод линий-разделителей в таблиц
 
-	virtual void chooseParameters() override;
-	virtual string getParameter(int n) override;
+	virtual void chooseParameters() override; //меню для выбора параметра для поиска/редактирования
+	virtual string getParameter(int n) override; //возвращает строку с названием поля, которое подлежит редатированию
 
-	virtual void edit(int n) override;
+	virtual void edit(int n) override; //редактирование выбранного поля в объекте класса AdministrativeStaff
 
 	//bool operator ==(Doctor&obj);
 	
-	string getCategory();
-	void setCategory(string category_);
+	string getCategory(); //возвращает категорию
+	void setCategory(string category_); //устнавливает категорию
 
-	string getSpeciality();
-	void setSpeciality(string speciality_);
+	string getSpeciality(); //возвращает специальность
+	void setSpeciality(string speciality_); //устанавливает специальность
 };
+
+
 

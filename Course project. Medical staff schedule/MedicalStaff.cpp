@@ -29,7 +29,7 @@ std::ostream & operator<<(std::ostream & out, const MedicalStaff & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const Staff&>(obj);
-	out << setiosflags(ios::left) << setw(19) << obj.department<<'|';
+	out << setiosflags(ios::left) << setw(19) << obj.department<< color<12, 2> << '|' << color<>;
 	return out;
 	
 }
@@ -37,21 +37,21 @@ std::ostream & operator<<(std::ostream & out, const MedicalStaff & obj)
 std::ifstream & operator>>(std::ifstream & in, MedicalStaff & obj)
 {
 	in >> dynamic_cast<Staff&>(obj);
-	std::getline(in, obj.department, '\n');
+	std::getline(in, obj.department, '|');
 	return in;
 }
 
 std::ofstream & operator<<(std::ofstream & out, MedicalStaff & obj)
 {
 	out << dynamic_cast<Staff&>(obj);
-	out << obj.department << '\n';
+	out << obj.department << '|';
 	return out;
 }
 
 void MedicalStaff::table(std::ostream & out)
 {
 	Staff::table(out);
-	out << std::setiosflags(std::ios::left)<< setw(20) << "|Отделение";
+	out << std::setiosflags(std::ios::left)<< color<12,2> << '|' << color<><< setw(19) << "Отделение";
 }
 
 void MedicalStaff::tableLines(std::ostream & out) const

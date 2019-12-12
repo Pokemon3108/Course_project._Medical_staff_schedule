@@ -28,3 +28,8 @@ void openForRead(std::ifstream& in,const char* path)
 		cerr << exception.what() << exception.getFilePath() << endl;
 	}
 }
+
+string FileError::getFilePath()
+{
+	return filepath;
+}

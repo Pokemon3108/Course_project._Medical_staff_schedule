@@ -21,9 +21,10 @@ public:
 	~Interface()
 	{}
 
-	void menu();
-	bool action(const char* filename);
-	void searchMenu(T& obj, Functor& f);
+	void menu(); //меню выбора типа объекта для дальнейшей работы
+	bool action(const char* filename); //выбор действия, которое необходимо произвести с объектом
+	void searchMenu(T& obj, Functor& f); //меню поиска по определённому параметру
+	void vectorOutput(std::vector<T> vec); //вывод вектора объектов
 	friend class Functor;
 };
 
@@ -38,7 +39,7 @@ void Interface<T>::menu()
 		cout << "Выберите тип: " << endl;
 		cout << "1-Доктор" << endl;
 		cout << "2-Медсестра" << endl;
-		cout << "3-Специалист в других сферах" << endl;
+		cout << "3-Члены административно-технического персонала" << endl;
 		cout << "4-Обслуживающий персонал" << endl;
 		cout << "0-Выйти из программы" << endl;
 		inputNumber(cin, n, 0, 4);
@@ -92,15 +93,15 @@ bool Interface<T>::action(const char* filename)
 	int n;
 	do
 	{
-		cout << "1-Добавить объект" << endl;
-		cout << "2-Вывести информацию о всех объектах" << endl;
-		cout << "3-Удалить объект" << endl;
+		cout << "1-Добавить работника" << endl;
+		cout << "2-Вывести информацию о всех работниках выбранной сферы" << endl;
+		cout << "3-Удалить работника" << endl;
 		cout << "4-Удалить всё" << endl;
-		cout << "5-Найти объекты по выбранным параметрам" << endl;
-		cout << "6-Количество объектов" << endl;
-		cout << "7-Отредактировать объект" << endl;
+		cout << "5-Найти работников по выбранным параметрам" << endl;
+		cout << "6-Количество работников" << endl;
+		cout << "7-Отредактировать работника" << endl;
 		cout << "8-Отменить последнее действие" << endl;
-		cout << "9-Осуществить операции с объектами других классов" << endl;
+		cout << "9-Осуществить операции с работниками других сфер" << endl;
 		cout << "0-Конец программы" << endl;
 
 		inputNumber(cin, n, 0, 9);
@@ -112,10 +113,10 @@ bool Interface<T>::action(const char* filename)
 		case 1:
 		{
 			T obj;
-			cout << "Введите объект:" << endl;
+			cout << "Введите информацию о работнике:" << endl;
 			cin >> obj;
 			Node<T>* temp = tree.search(obj);
-			if (temp) cout << "Объект с таким именем уже существует" << endl;
+			if (temp) cout << "Работника с таким именем уже существует" << endl;
 			else {
 				tree.push(obj);
 				st.push(Cancel<T>("push", obj));
@@ -140,7 +141,7 @@ bool Interface<T>::action(const char* filename)
 		case 3:
 		{
 			T obj;
-			cout << "Введите объект" << endl;
+			cout << "Введите работника" << endl;
 			obj.inputFullName(); //ввели полное имя
 			Node<T>* temp = tree.search(obj); //нашли объект с таким именем
 			if (temp)
@@ -173,30 +174,9 @@ bool Interface<T>::action(const char* filename)
 			searchMenu(obj, functorObj);
 			std::vector<T> objVector = search(tree.begin(), tree.end(), obj, functorObj);
 			if (objVector.size())
-			{
-
-				int act;
-				cout << "0-График дежурств\n" << "1-График работы\n" << "2-Продолжить далее\n" << endl;
-				inputNumber(cin, act, 0, 2);
-				do
-				{
-					obj.tableLines(cout);
-					obj.table(cout);
-					obj.tableGraphic(cout);
-					typename std::vector<T>::iterator it;
-					for (it = objVector.begin(); it != objVector.end(); it++)
-					{
-						cout << (*it);
-						it->outputGraphic(cout, bool(act));
-						cout << endl;
-
-					}
-					obj.tableLines(cout);
-					cout << "0-График дежурств\n" << "1-График работы\n" << "2-Продолжить далее\n" << endl;
-					inputNumber(cin, act, 0, 2);
-				} while (act != 2);
-
-			}
+				vectorOutput(objVector);
+			
+			else cout << "Работников с данными параметрами не найдено";
 			break;
 		}
 		case 6:
@@ -220,7 +200,7 @@ bool Interface<T>::action(const char* filename)
 			cout << "Выберите параметр для редактирования:" << endl;
 			obj.chooseParameters();
 			int parameter;
-			inputNumber(cin, parameter, 0, 8);
+			inputNumber(cin, parameter, 1, 8);
 			objPtr->data.edit(parameter);
 			st.push(Cancel<T>("edit", obj, objPtr->data)); //заносим в стек объекты до редактирования и после
 			break;
@@ -234,14 +214,14 @@ bool Interface<T>::action(const char* filename)
 				action.cancelAction(tree);
 				st.pop();
 			}
-			else cout << "Последние действия отменить нельзя\n";
+			else cout << "Последние действия отменить нельзя" << endl;
 			break;
 		}
 		case 9:
 		case 0:
 		{
 			string str;
-			std::cout << "Сохранить изменения?"<<endl;
+			std::cout << "Сохранить изменения?\n";
 			inputYesNo(cin, str);
 			if (str == "да" || str=="Да")
 			{
@@ -281,4 +261,30 @@ void Interface<T>::searchMenu(T& obj, Functor & f)
 		inputNumber(cin, i, 0, 1);
 	} while (i);
 	f = func;
+}
+
+template<typename T>
+void Interface<T>::vectorOutput(std::vector<T> vec)
+{
+	T obj;
+	int act;
+	cout << "0-График дежурств\n" << "1-График работы\n" << "2-Продолжить далее\n" << endl;
+	inputNumber(cin, act, 0, 2);
+	do
+	{
+		obj.tableLines(cout);
+		obj.table(cout);
+		obj.tableGraphic(cout);
+		typename std::vector<T>::iterator it;
+		for (it = vec.begin(); it != vec.end(); it++)
+		{
+			cout << (*it);
+			it->outputGraphic(cout, bool(act));
+			cout << endl;
+
+		}
+		obj.tableLines(cout);
+		cout << "0-График дежурств\n" << "1-График работы\n" << "2-Продолжить далее\n" << endl;
+		inputNumber(cin, act, 0, 2);
+	} while (act != 2);
 }

@@ -2,9 +2,6 @@
 #include "InputError.h"
 #include <vector>
 
-
-using std::endl;
-
 void inputLetters(std::istream& in, string & str)
 {
 	bool flag;

@@ -14,7 +14,7 @@ std::ostream & operator<<(std::ostream & out, const Nurse & obj)
 {
 	using namespace std;
 	out << dynamic_cast<const MedicalStaff&>(obj);
-	out << setiosflags(ios::left) << setw(24) << obj.workprofile<<'|';
+	out << setiosflags(ios::left) << setw(24) << obj.workprofile<< color<12, 2> << '|' << color<>;
 	return out;
 }
 
@@ -32,11 +32,11 @@ std::ofstream & operator<<(std::ofstream & out, Nurse & obj)
 	return out;
 }
 
-bool Nurse::operator==(Nurse & obj)
-{
-	return (dynamic_cast<MedicalStaff&>(obj) == *(dynamic_cast<MedicalStaff*>(this))
-		&& obj.workprofile == workprofile);
-}
+//bool Nurse::operator==(Nurse & obj)
+//{
+//	return (dynamic_cast<MedicalStaff&>(obj) == *(dynamic_cast<MedicalStaff*>(this))
+//		&& obj.workprofile == workprofile);
+//}
 
 void Nurse::setWorkProfile(string profile)
 {
@@ -52,7 +52,7 @@ void Nurse::table(std::ostream & out)
 {
 	using namespace std;
 	MedicalStaff::table(out);
-	out << setiosflags(ios::left) << setw(25) << "|Профиль работы";
+	out << setiosflags(ios::left) << color<12, 2> << '|' << color<><<setw(24) << "Профиль работы";
 }
 
 void Nurse::tableLines(std::ostream & out) const
@@ -87,6 +87,8 @@ string Nurse::getParameter(int n)
 				return "workProfile";
 
 			default:
+				cout << "Введённое число не принадлежит заданному диапазону. Введите новый параметр: ";
+				inputNumber(cin, n, 1, 7);
 				i = 1;
 			}
 		}

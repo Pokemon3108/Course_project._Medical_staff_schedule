@@ -4,7 +4,7 @@
 class ServiceStaff : public TechnicalStaff
 {
 private:
-	string workPlace;
+	string workPlace; //рабочая область
 public:
 	ServiceStaff() = default;
 	ServiceStaff(string place, string profession_, string firstName_, string surname_, string fatherName_, list<graphic> work, list<graphic> duty) :
@@ -14,22 +14,21 @@ public:
 
 	~ServiceStaff() {};
 
-	friend std::istream& operator >> (std::istream& in, ServiceStaff& obj);
-	friend std::ostream& operator << (std::ostream& out, const ServiceStaff& obj);
-	friend std::ifstream& operator >>(std::ifstream& in, ServiceStaff& obj);
-	friend std::ofstream& operator << (std::ofstream& out, ServiceStaff& obj);
+	friend std::istream& operator >> (std::istream& in, ServiceStaff& obj); //инициализация объекта класса ServiceStaff с консоли
+	friend std::ostream& operator << (std::ostream& out, const ServiceStaff& obj); //вывод объекта класса ServiceStaff на экран
+	friend std::ifstream& operator >>(std::ifstream& in, ServiceStaff& obj); //чтение объекта класса ServiceStaff из файла
+	friend std::ofstream& operator << (std::ofstream& out, ServiceStaff& obj); //запись объекта класса ServiceStaff в файл
 	
-	virtual void table(std::ostream & out) override;
-	virtual void tableLines(std::ostream& out) const override;
+	virtual void table(std::ostream & out) override; //вывод шапки таблицы
+	virtual void tableLines(std::ostream& out) const override; //вывод линий-разделителей в таблице
 
-	virtual void edit(int n) override;
+	virtual void edit(int n) override; //редактирование выбранного поля в объекте класса ServiceStaff
 
-	virtual void chooseParameters() override;
-	virtual string getParameter(int n) override;
+	virtual void chooseParameters() override; //меню для выбора параметра для поиска/редактирования
+	virtual string getParameter(int n) override; //возвращает строку с названием поля, которое подлежит редатированию
 
-	bool operator==(ServiceStaff& obj);
+	//bool operator==(ServiceStaff& obj);
 
-	string getWorkPlace();
-	void setWorkPlace(string place);
+	string getWorkPlace(); //устанавливает рабочую область
+	void setWorkPlace(string place); //возвращает рабочую область
 };
-
