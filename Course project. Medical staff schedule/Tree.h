@@ -37,10 +37,8 @@ public:
 		bool operator==(Iterator it); //сравнение указателей
 		bool operator!=(Iterator it); //сравнение указателей
 
-		Node<T>* getPtr()
-		{
-			return ptr;
-		}
+		Node<T>* getPtr();
+		
 
 		friend class Tree;
 	};
@@ -319,6 +317,12 @@ template<typename T>
 bool Tree<T>::Iterator::operator!=(Iterator it)
 {
 	return !(*this == it);
+}
+
+template<typename T>
+Node<T>* Tree<T>::Iterator::getPtr()
+{
+	return ptr;
 }
 
 template<typename T>

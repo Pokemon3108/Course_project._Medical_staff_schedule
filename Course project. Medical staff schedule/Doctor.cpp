@@ -92,11 +92,11 @@ void Doctor::chooseParameters()
 string Doctor::getParameter(int n)
 {
 	int i = 0;
-	string parameter;
+	string parameter; //параметр, который определяет какое поле было выбрано для поиска
 	do
 	{
-		parameter = MedicalStaff::getParameter(n);
-		if (parameter == "")
+		parameter = MedicalStaff::getParameter(n); //получаем выбранное поле родительского класса
+		if (parameter == "") //если поля родительских классов не были выбраны
 		{
 			switch (n)
 			{

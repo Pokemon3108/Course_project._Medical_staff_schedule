@@ -61,7 +61,7 @@ string AdministrativeStaff::getParameter(int n)
 	string parameter; //параметр, который определяет какое поле было выбрано для поиска
 	do
 	{
-		parameter = TechnicalStaff::getParameter(n); //получаем выбрааное поле родительского класса
+		parameter = TechnicalStaff::getParameter(n); //получаем выбранное поле родительского класса
 		if (parameter == "") //если поля родительских классов не были выбраны
 		{
 			switch (n)
