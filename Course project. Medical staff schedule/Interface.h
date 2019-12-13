@@ -200,7 +200,8 @@ bool Interface<T>::action(const char* filename)
 			cout << "Выберите параметр для редактирования:" << endl;
 			obj.chooseParameters();
 			int parameter;
-			inputNumber(cin, parameter, 1, 8);
+			if (filename=="..\\files\\Doctor.txt") inputNumber(cin, parameter, 1, 8);
+			else inputNumber(cin, parameter, 1, 7);
 			objPtr->data.edit(parameter);
 			st.push(Cancel<T>("edit", obj, objPtr->data)); //заносим в стек объекты до редактирования и после
 			break;
@@ -252,8 +253,9 @@ void Interface<T>::searchMenu(T& obj, Functor & f)
 		int parameter;
 		cout << "Выберите параметры для поиска:" << endl;
 		obj.chooseParameters();
-		inputNumber(cin, parameter, 0, 8);
-		
+		if (typeid(T)==typeid(Doctor)) inputNumber(cin, parameter, 1, 8);
+		else inputNumber(cin, parameter, 1, 7);
+
 		std::string strForSet = obj.getParameter(parameter);
 		func.getSetFields().insert(strForSet);
 		

@@ -27,9 +27,10 @@ std::istream & operator>>(std::istream & in, MedicalStaff & obj)
 
 std::ostream & operator<<(std::ostream & out, const MedicalStaff & obj)
 {
+	//вывод объекта в таблицу с разделителями и цветными границами
 	using namespace std;
 	out << dynamic_cast<const Staff&>(obj);
-	out << setiosflags(ios::left) << setw(19) << obj.department<< color<12, 2> << '|' << color<>;
+	out << setiosflags(ios::left) << setw(19) << obj.department<< color<12, 3> << '|' << color<>;
 	return out;
 	
 }
@@ -51,11 +52,14 @@ std::ofstream & operator<<(std::ofstream & out, MedicalStaff & obj)
 void MedicalStaff::table(std::ostream & out)
 {
 	Staff::table(out);
-	out << std::setiosflags(std::ios::left)<< color<12,2> << '|' << color<><< setw(19) << "Отделение";
+
+	//вывод шапки таблицы с изменением цвета линий-разделителей между названиями колонок
+	out << std::setiosflags(std::ios::left)<< color<12,3> << '|' << color<><< setw(19) << "Отделение";
 }
 
 void MedicalStaff::tableLines(std::ostream & out) const
 {
+	//вывод линий-разделителей между строками таблицы
 	Staff::tableLines(out);
 	string str1(19, '-');
 	out << str1 << '+';
@@ -70,13 +74,13 @@ void MedicalStaff::chooseParameters()
 
 std::string MedicalStaff::getParameter(int n)
 {
-	std::string parameter = Staff::getParameter(n);
-	if (parameter == "")
+	string parameter = Staff::getParameter(n); //параметр, который определяет какое поле было выбрано для поиска
+	if (parameter == "") //если поля родительских классов не были выбраны, то работаем с полями данного класса
 	{
 		switch (n)
 		{
 		case 6:
-			std::cout << "Отделение:";
+			cout << "Отделение:";
 			inputLetters(cin, department);
 			return "department";
 
@@ -84,15 +88,17 @@ std::string MedicalStaff::getParameter(int n)
 			return "";
 		}
 	}
-	else return parameter;
+	//если был выбран параметр родительского класса, то вернуть его
+	return parameter;
 }
 
 void MedicalStaff::edit(int n)
 {
+	//определение параметра, который выбрал пользователь
 	Staff::edit(n);
-	if (n == 6)
+	if (n == 6) //если пользователь выбрал 6-й параметр, то редактируем отделение
 	{
-		std::cout << "Отделение:";
+		cout << "Отделение:";
 		inputLetters(cin, department);
 	}
 }

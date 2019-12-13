@@ -16,11 +16,12 @@ std::istream & operator>>(std::istream & in, Staff & obj)
 
 std::ostream & operator<<(std::ostream & out, const Staff & obj)
 {
+	//вывод объекта в таблицу с разделителями и цветными границами
 	obj.tableLines(out);
 	using namespace std;
 	
-	out << setiosflags(ios::left) << color<12, 2> << '|' << color<> <<setw(14) << obj.firstName << color<12, 2> << '|' << color<>
-		<< setw(19)  << obj.surname << color<12, 2> << '|' << color<> << setw(19) << obj.fatherName<< color<12, 2> << '|' << color<>;
+	out << setiosflags(ios::left) << color<12, 3> << '|' << color<> <<setw(14) << obj.firstName << color<12, 3> << '|' << color<>
+		<< setw(19)  << obj.surname << color<12, 3> << '|' << color<> << setw(19) << obj.fatherName<< color<12, 3> << '|' << color<>;
 	return out;
 }
 
@@ -120,13 +121,13 @@ void Staff::outputGraphic(std::ostream & out, bool flag)
 				(it2->weekday == "Воскресенье" && i == 7))
 			{
 				fl = 0;
-				out << std::setiosflags(std::ios::left) << setw(11) << time << color<12, 2> << '|' << color<>;
+				out << std::setiosflags(std::ios::left) << setw(11) << time << color<12, 3> << '|' << color<>;
 				break;
 			}
 
 		}
 		
-		if (fl) out << setw(11) << ' ' << color<12, 2> << '|' << color<>;
+		if (fl) out << setw(11) << ' ' << color<12, 3> << '|' << color<>;
 	}
 }
 	
@@ -134,16 +135,15 @@ void Staff::table(std::ostream & out)
 {
 	using namespace std;
 
-	//SetColor(14, 3);
-	//out << setiosflags(ios::left) <<color<1,2> <<'|' <<setw(15) << "|Имя" << setw(20) << "|Фамилия" << setw(20) << "|Отчество";
-	out << setiosflags(ios::left) << color<12, 2> << '|' << color<> << setw(14) << "Имя" << color<12, 2> << '|'<< color<> 
-		<< setw(19) << "Фамилия" << color<12, 2> <<'|'<< color<> <<setw(19) << "Отчество";
+	
+	out << setiosflags(ios::left) << color<12, 3> << '|' << color<> << setw(14) << "Имя" << color<12, 3> << '|'<< color<> 
+		<< setw(19) << "Фамилия" << color<12, 3> <<'|'<< color<> <<setw(19) << "Отчество";
 	
 }
 
 void Staff::tableLines(std::ostream & out) const
 {
-	SetColor(12, 2);
+	SetColor(12, 3);
 	out << '+';
 	string str1(14, '-');
 	string str2(19, '-');
@@ -161,10 +161,10 @@ void Staff::graphicLines(std::ostream & out)
 
 void Staff::tableGraphic(std::ostream & out)
 {
-	cout << color<12, 2> <<'|'<< color<> <<setw(11) << "Понедельник" << color<12, 2> << '|' << color<> <<setw(11) << "Вторник" <<
-		color<12, 2> << '|' << color<> << setw(11) << "Среда" << color<12, 2> << '|' << color<> << setw(11) << "Четверг" << 
-		color<12, 2> << '|' << color<> << setw(11) << "Пятница" << color<12, 2> << '|' << color<> << setw(11) << "Суббота" <<
-		color<12, 2> << '|' << color<> << setw(11) << "Воскресенье"<< color<12,2> <<'|'<<endl;
+	cout << color<12, 3> <<'|'<< color<> <<setw(11) << "Понедельник" << color<12, 3> << '|' << color<> <<setw(11) << "Вторник" <<
+		color<12, 3> << '|' << color<> << setw(11) << "Среда" << color<12, 3> << '|' << color<> << setw(11) << "Четверг" << 
+		color<12, 3> << '|' << color<> << setw(11) << "Пятница" << color<12, 3> << '|' << color<> << setw(11) << "Суббота" <<
+		color<12, 3> << '|' << color<> << setw(11) << "Воскресенье"<< color<12,3> <<'|'<<endl;
 }
 
 void Staff::chooseParameters()

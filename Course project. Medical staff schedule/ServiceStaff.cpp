@@ -11,9 +11,10 @@ std::istream & operator>>(std::istream & in, ServiceStaff & obj)
 
 std::ostream & operator<<(std::ostream & out, const ServiceStaff & obj)
 {
+	//вывод объекта в таблицу с разделител€ми и цветными границами
 	using namespace std;
 	out << dynamic_cast<const TechnicalStaff&>(obj);
-	out << setiosflags(ios::left) << setw(29) << obj.workPlace<< color<12, 2> << '|' << color<>;
+	out << setiosflags(ios::left) << setw(29) << obj.workPlace<< color<12, 3> << '|' << color<>;
 	return out;
 }
 
@@ -34,11 +35,14 @@ std::ofstream & operator<<(std::ofstream & out, ServiceStaff & obj)
 void ServiceStaff::table(std::ostream & out)
 {
 	TechnicalStaff::table(out);
-	out << std::setiosflags(std::ios::left) << color<12, 2> << '|' << color<><<setw(29) << "–абоча€ область";
+
+	//вывод шапки таблицы с изменением цвета линий-разделителей между названи€ми колонок
+	out << std::setiosflags(std::ios::left) << color<12, 3> << '|' << color<><<setw(29) << "–абоча€ область";
 }
 
 void ServiceStaff::tableLines(std::ostream & out) const
 {
+	//вывод шапки таблицы с изменением цвета линий-разделителей между названи€ми колонок
 	TechnicalStaff::tableLines(out);
 	string str1(29, '-');
 	out << str1 << '+';
@@ -64,27 +68,22 @@ void ServiceStaff::chooseParameters()
 
 string ServiceStaff::getParameter(int n)
 {
-	int i = 0;
-	string parameter;
-	do
+	
+	string parameter; //параметр, который определ€ет какое поле было выбрано дл€ поиска
+
+	parameter = TechnicalStaff::getParameter(n); //получаем выбранное поле родительского класса
+	if (parameter == "") //если пол€ родительских классов не были выбраны, то работаем с пол€ми данного класса
 	{
-		parameter = TechnicalStaff::getParameter(n);
-		if (parameter == "")
+		switch (n)
 		{
-			switch (n)
-			{
-			case 7:
-				std::cout << "–абоча€ область:";
-				//inputLettersAndNumbers(cin, workPlace);
-				std::getline(cin, workPlace);
-				return "workPlace";
-			default:
-				cout << "¬ведЄнное число не принадлежит заданному диапазону. ¬ведите новый параметр: ";
-				inputNumber(cin, n, 1, 7);
-				i = 1;
-			}
+		case 7:
+			cout << "–абоча€ область:";
+			std::getline(cin, workPlace);
+			return "workPlace";
 		}
-	} while (i);
+	}
+
+	//если был выбран параметр родительского класса, то вернуть его
 	return parameter;
 }
 
